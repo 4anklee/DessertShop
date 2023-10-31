@@ -29,10 +29,11 @@ public class DessertShop {
 
                         1. Candy
                         2. Cookie
-                        3. IceCream
+                        3. Ice Cream
                         4. Sundae
-
-                        What would you like to add to your order?(1-4, enter for done):
+                        5. Admin Module
+                                                
+                        What would you like to add to your order?(1-5, enter for done):
                         """);
                 choice = in.nextLine().trim();
 
@@ -44,6 +45,7 @@ public class DessertShop {
                         case "2" -> order.add(userPromptCookie());
                         case "3" -> order.add(userPromptIceCream());
                         case "4" -> order.add(userPromptSundae());
+                        case "5" -> AdminModule();
                         default ->
                                 System.out.println("Invalid response. Please enter 1-4 for adding items to the order or" +
                                         " press enter for done.");
@@ -98,28 +100,28 @@ public class DessertShop {
 
     }
 
-    private static DessertItem userPromptCandy(){
+    private static DessertItem userPromptCandy() {
         String candy = StringInputValidation("Enter the type of candy: ");
         double weight = DoubleInputValidation("Enter the weight purchased: ");
         double price = DoubleInputValidation("Enter the price per pound: ");
         return new Candy(candy.trim(), weight, price);
     }
 
-    private static DessertItem userPromptCookie(){
+    private static DessertItem userPromptCookie() {
         String cookie = StringInputValidation("Enter the type of cookie: ");
         int quantity = IntegerInputValidation("Enter the quantity purchased: ");
         double price = DoubleInputValidation("Enter the price per dozen: ");
         return new Cookie(cookie.trim(), quantity, price);
     }
 
-    private static DessertItem userPromptIceCream(){
+    private static DessertItem userPromptIceCream() {
         String iceCream = StringInputValidation("Enter the type of ice cream: ");
         int scoop = IntegerInputValidation("Enter the number of scoops: ");
         double price = DoubleInputValidation("Enter the price per scoop: ");
         return new IceCream(iceCream.trim(), scoop, price);
     }
 
-    private static DessertItem userPromptSundae(){
+    private static DessertItem userPromptSundae() {
         String iceCream = StringInputValidation("Enter the type of ice cream: ");
         int quantity = IntegerInputValidation("Enter the number of scoop: ");
         double price = DoubleInputValidation("Enter the price per scoop: ");
@@ -128,49 +130,112 @@ public class DessertShop {
         return new Sundae(iceCream.trim(), quantity, price, topping.trim(), toppingPrice);
     }
 
-    public static String StringInputValidation(String prompt){
-        while(true) {
+    public static String StringInputValidation(String prompt) {
+        while (true) {
             try {
                 System.out.println(prompt);
                 return in.nextLine().trim();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Invalid entry!");
             }
         }
     }
 
-    public static int IntegerInputValidation(String prompt){
-        while(true) {
+    public static int IntegerInputValidation(String prompt) {
+        while (true) {
             try {
                 System.out.println(prompt);
                 return Integer.parseInt(in.nextLine().trim());
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Invalid entry!");
             }
         }
     }
 
-    public static Double DoubleInputValidation(String prompt){
-        while(true) {
+    public static Double DoubleInputValidation(String prompt) {
+        while (true) {
             try {
                 System.out.println(prompt);
                 return Double.parseDouble(in.nextLine().trim());
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Invalid entry!");
             }
         }
     }
 
-    public static Customer buildCustomerInfo(Order order){
+    public static Customer buildCustomerInfo(Order order) {
         String custName = StringInputValidation("Enter the customer name: ");
-        if(customerDB.containsKey(custName)){
+        if (customerDB.containsKey(custName)) {
             customerDB.get(custName).addToHistory(order);
             return customerDB.get(custName);
-        }else{
+        } else {
             Customer customer = new Customer(custName);
             customerDB.put(customer.getCustName(), customer);
             customerDB.get(custName).addToHistory(order);
             return customer;
         }
+    }
+
+    public static void AdminModule() {
+        do {
+            System.out.println("""
+                     
+                    1. Shop Customer List
+                    2. Customer Order History
+                    3. Best Customer
+                    4. Exit Admin Module
+                            
+                    What would you like to do?(1-4):""");
+            String choices = in.nextLine().trim();
+            switch (choices) {
+                case "1" -> {
+                    for (Customer customer : customerDB.values()) {
+                        System.out.printf("CustomerName: %s   Customer ID: %d\n",
+                                customer.getCustName(), customer.getCustID());
+                    }
+                }
+                case "2" -> {
+                    Customer customer;
+                    while(true) {
+                        System.out.println("Enter the name of the customer: ");
+                        customer = customerDB.get(in.nextLine().trim());
+                        if(customer == null) {
+                            System.out.println("Cannot find the customer's information in the database, please check" +
+                                    " your spelling and enter the customer's name again");
+                        }else{
+                            break;
+                        }
+                    }
+                    System.out.printf("\nCustomer Name: %s   Customer ID: %d\n", customer.getCustName(), customer.getCustID());
+                    System.out.println("------------------------------------------------------------------" +
+                            "-----------------------------------");
+                    for (Order order : customer.getOrderHistory()) {
+                        System.out.printf("Order #: %d\n %s\n\n", customer.getOrderHistory().indexOf(order) + 1, order);
+                    }
+                }
+                case "3" -> {
+                    bestValuedCustomer name = () -> {
+                        int orderAmount = 0;
+                        String result = "";
+                        for (Customer customer : customerDB.values()) {
+                            if (customer.getOrderHistory().size() > orderAmount) {
+                                orderAmount = customer.getOrderHistory().size();
+                                result = customer.getCustName();
+                            }
+                        }
+                        return result;
+                    };
+                    System.out.printf("The Dessert Shop's best valued customer is: %s!\n", name.bestValuedCustName());
+                }
+                case "4" -> {}
+                default -> System.out.println("Invalid response. Please enter 1-4 for adding items to the order or" +
+                        " press enter for done.");
+            }
+        } while (!in.nextLine().trim().equals("4"));
+
+    }
+
+    public interface bestValuedCustomer{
+        String bestValuedCustName();
     }
 }

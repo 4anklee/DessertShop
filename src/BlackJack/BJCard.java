@@ -1,6 +1,8 @@
 package BlackJack;
 
-public class BJCard {
+import BlackJackBase.PCard;
+
+public class BJCard extends PCard {
     int suit;
     int rank;
     boolean hidden;
@@ -44,8 +46,23 @@ public class BJCard {
         this.rank = rank;
     }
 
+    @Override
+    public void hideCard() {
+
+    }
+
+    @Override
+    public void showCard() {
+
+    }
+
     public boolean isHidden() {
         return hidden;
+    }
+
+    @Override
+    public String getText() {
+        return null;
     }
 
     public void setHidden(boolean hidden) {

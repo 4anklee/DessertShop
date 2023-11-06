@@ -53,14 +53,15 @@ public class DessertShop {
                 }
             }
 
-            Candy candyCorn = new Candy("Candy Corn", 1.5, 0.25);
+//            Candy candyCorn = new Candy("Candy Corn", 1.5, 0.25);
             Candy gummyBears = new Candy("Gummy Bears", 0.25, 0.35);
-            Cookie chocolateChip = new Cookie("Chocolate Chip", 6, 3.99);
+//            Cookie chocolateChip = new Cookie("Chocolate Chip", 6, 3.99);
             IceCream pistachio = new IceCream("Pistachio", 2, 0.79);
-            Sundae vanilla = new Sundae("Vanilla", 3, 0.69, "Hot Fudge", 1.29);
+//            Sundae vanilla = new Sundae("Vanilla", 3, 0.69, "Hot Fudge", 1.29);
             Cookie oatmealRaisin = new Cookie("Oatmeal Raisin", 2, 3.45);
 
-            order.add(candyCorn, gummyBears, chocolateChip, pistachio, vanilla, oatmealRaisin);
+
+            order.add(gummyBears, pistachio, oatmealRaisin);
 
             Customer customer = buildCustomerInfo(order);
 

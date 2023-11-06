@@ -28,4 +28,27 @@ public class BJCard {
         this.rank = rank;
         this.hidden = false;
     }
+    public int getSuit() {
+        return suit;
+    }
+
+    public void setSuit(int suit) {
+        this.suit = suit;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
 }

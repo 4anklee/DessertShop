@@ -9,9 +9,9 @@ public class BJCard extends PCard {
     int rank;
     boolean hidden;
     public static final int CLUB = 1;
-    public static final int DIAMOND = 1;
-    public static final int HEART = 1;
-    public static final int SPADE = 1;
+    public static final int DIAMOND = 2;
+    public static final int HEART = 3;
+    public static final int SPADE = 4;
     public static final int ACE = 1;
     public static final int TWO = 2;
     public static final int THREE = 3;
@@ -26,6 +26,8 @@ public class BJCard extends PCard {
     public static final int KNIGHT = 12;
     public static final int QUEEN = 13;
     public static final int KING  = 14;
+    public static final int[] suits = {CLUB, DIAMOND, HEART, SPADE};
+    public static final int[] ranks = {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, KNIGHT, QUEEN, KING};
 
     public BJCard(int suit, int rank){
         this.suit = suit;
@@ -48,10 +50,6 @@ public class BJCard extends PCard {
         this.rank = rank;
     }
 
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
-
     @Override
     public boolean isHidden() {
         return hidden;
@@ -59,23 +57,41 @@ public class BJCard extends PCard {
 
     @Override
     public void hideCard() {
-
+        this.hidden = true;
     }
 
     @Override
     public void showCard() {
-
+        this.hidden = false;
     }
 
     @Override
     public String getText() {
-        return null;
+        String suitText = "";
+        switch(this.suit){
+            case CLUB -> suitText = "♣";
+            case DIAMOND -> suitText = "♦";
+            case HEART -> suitText = "♥";
+            case SPADE -> suitText = "♠";
+        }
+        String rankText = "";
+        switch (this.rank){
+            case ACE -> rankText = "A";
+            case JACK -> rankText = "J";
+            case KNIGHT -> rankText = "Kn";
+            case QUEEN -> rankText = "Q";
+            case KING -> rankText = "K";
+            default -> {
+                if(this.rank >= 1 && this.rank <= 10){
+                    rankText = String.valueOf(this.rank);
+                }
+            }
+        }
+        return suitText + rankText;
     }
 
     @Override
     public Color getFontColor(){
-        if(){
-
-        }
+        return getSuit() == CLUB || getSuit() == SPADE ? Color.BLACK : Color.RED;
     }
 }

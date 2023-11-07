@@ -6,11 +6,12 @@
  */
 package DessertShop;
 
+import DessertShop.Payable.PayType;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import DessertShop.Payable.PayType;
 
 
 public class DessertShop {
@@ -190,7 +191,9 @@ public class DessertShop {
             String choices = in.nextLine().trim();
             switch (choices) {
                 case "1" -> {
-                    for (Customer customer : customerDB.values()) {
+                    for (Customer customer : customerDB.values().stream()
+                            .sorted((customer1, customer2) -> Integer.compare(customer2.getCustID(), customer1.getCustID()))
+                            .toList()) {
                         System.out.printf("CustomerName: %s   Customer ID: %d\n",
                                 customer.getCustName(), customer.getCustID());
                     }

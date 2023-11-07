@@ -98,7 +98,7 @@ public class Order implements Payable{
                 String.format("$%.2f", (orderCost() + orderTax())));
         finalOutput.append(summary);
         finalOutput.append("-----------------------------------------------------------------------------------------------------\n");
-        finalOutput.append(String.format("Paid with %s", PaymentMethod));
+        finalOutput.append(String.format("Paid with %s", getPayType()));//Previously set to PaymentMethod(String)
         return finalOutput.toString();
     }
 

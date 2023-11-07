@@ -69,6 +69,7 @@ public class DessertShop {
                 PaymentMethod = in.nextLine().toUpperCase();
 
                 try {
+
                     order.setPayType(PayType.valueOf(PaymentMethod));
 
                     switch (order.getPayType()) {
@@ -177,7 +178,7 @@ public class DessertShop {
     }
 
     public static void AdminModule() {
-        do {
+        while(true) {
             System.out.println("""
                      
                     1. Shop Customer List
@@ -227,11 +228,11 @@ public class DessertShop {
                     };
                     System.out.printf("The Dessert Shop's best valued customer is: %s!\n", name.bestValuedCustName());
                 }
-                case "4" -> {}
+                case "4" -> {return;}
                 default -> System.out.println("Invalid response. Please enter 1-4 for adding items to the order or" +
                         " press enter for done.");
             }
-        } while (!in.nextLine().trim().equals("4"));
+        }
 
     }
 

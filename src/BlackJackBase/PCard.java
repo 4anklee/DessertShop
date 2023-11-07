@@ -22,9 +22,9 @@ public abstract class PCard {
 	public abstract void showCard();
 
 	/**
-	 * Finds if the card if face-down or face-up 
+	 * Finds if the card is face-down or face-up
 	 * 
-	 * @return <b>true</b> if the card if face down.
+	 * @return <b>true</b> if the card is face down.
 	 */
 	public abstract boolean isHidden();
 

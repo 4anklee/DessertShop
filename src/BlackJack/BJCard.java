@@ -2,6 +2,8 @@ package BlackJack;
 
 import BlackJackBase.PCard;
 
+import java.awt.*;
+
 public class BJCard extends PCard {
     int suit;
     int rank;
@@ -46,6 +48,15 @@ public class BJCard extends PCard {
         this.rank = rank;
     }
 
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    @Override
+    public boolean isHidden() {
+        return hidden;
+    }
+
     @Override
     public void hideCard() {
 
@@ -56,16 +67,15 @@ public class BJCard extends PCard {
 
     }
 
-    public boolean isHidden() {
-        return hidden;
-    }
-
     @Override
     public String getText() {
         return null;
     }
 
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
+    @Override
+    public Color getFontColor(){
+        if(){
+
+        }
     }
 }

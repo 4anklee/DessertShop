@@ -43,7 +43,7 @@ public class House extends Residential {
                 -------------------------------------------------------------------------------
                 Resident Type: House       Address: %-20s Zip Code: %-20s
                 -------------------------------------------------------------------------------
-                Sq Footage: %.2f
+                Sq Footage: %.0f
                 Bedroom: %d
                 Bathroom: %d
                 Yard Size(Acres): %.2f

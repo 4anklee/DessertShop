@@ -58,9 +58,10 @@ public class REO {
                             }
                             case "2" -> System.out.printf("""
                                     Current listings for REO:
+                                    
                                     %s
                                     """, listingsDB);
-                            case "3" -> System.out.println("Auto Populate Listings (Dev tool)");
+                            case "3" -> autoPopulate();
                             case "" -> {}
                             default -> System.out.println("Invalid response!");
                         }
@@ -134,7 +135,6 @@ public class REO {
     }
 
     public static void autoPopulate(){
-//        int currentSize = listingsDB.getListings().size();
         House house1 = new House("34 Elm","95129", 3, 2, 2200,0.2, 0, 0);
         house1.setListPrice(house1.calculateAppraisalPrice() * 1.1);
         listingsDB.addListing("34 Elm", house1);
@@ -166,6 +166,7 @@ public class REO {
         House house5 = new House("1220 Apple", "84057", 8, 7, 7900, 1, 0, 0);
         house5.setListPrice(house5.calculateAppraisalPrice() * 1.1);
         listingsDB.addListing("1220 Apple", house5);
+        System.out.printf("\n%d residences have been added to the listings for testing purpose.\n", listingsDB.getListings().size());
     }
 
     public static String StringInputValidation(String prompt) {

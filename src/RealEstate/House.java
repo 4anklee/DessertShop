@@ -36,4 +36,27 @@ public class House extends Residential {
                 + 460000 * getYardAcres());
         return this.getAppraisalPrice();
     }
+
+    @Override
+    public String toString(){
+        return String.format("""
+                -------------------------------------------------------------------------------
+                Resident Type: House       Address: %-20s Zip Code: %-20s
+                -------------------------------------------------------------------------------
+                Sq Footage: %.2f
+                Bedroom: %d
+                Bathroom: %d
+                Yard Size(Acres): %.2f
+                -----------------------------------------
+                Appraisal Price: %.2f
+                List Price: %.2f
+                -----------------------------------------
+                """, getStreetAddress(), getZip(),
+                getSqFootage(),
+                getBedCount(),
+                getBathCount(),
+                getYardAcres(),
+                calculateAppraisalPrice(),
+                getListPrice());
+    }
 }

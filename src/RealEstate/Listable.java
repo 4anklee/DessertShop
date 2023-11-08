@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.Set;
 
 public interface Listable {
-    public HashMap<String, Residential> getListings();
-    public Residential getListing(String listing);
-    public Set<String> getStreetAddresses();
-    public Collection<Residential> getResidences();
-    public int getListingCount();
-    public void addListing(String listing, Residential residential);
+    HashMap<String, Residential> getListings();
+    Residential getListing(String listing);
+    Set<String> getStreetAddresses();
+    Collection<Residential> getResidences();
+    int getListingCount();
+    void addListing(String listing, Residential residential);
 }

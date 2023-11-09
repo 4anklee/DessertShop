@@ -2,6 +2,8 @@ package BlackJackTest;
 
 import BlackJack.BJDeck;
 
+import static BlackJackTest.DeckTest.run;
+
 public class PlayBlackJack {
     public static void main(String[] args) {
 //        BJCard spadeAce = new BJCard(SPADE, ACE);
@@ -16,7 +18,6 @@ public class PlayBlackJack {
 //            run(card);
 //        }
         BJDeck bjDeck = new BJDeck();
-        DeckTest.run(bjDeck);
-
+        run(bjDeck);
     }
 }

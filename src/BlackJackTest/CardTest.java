@@ -1,4 +1,4 @@
-package BlackJaveTest;
+package BlackJackTest;
 
 import java.awt.Color;
 import java.awt.Dimension;

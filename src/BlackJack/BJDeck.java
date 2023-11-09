@@ -4,6 +4,8 @@ import BlackJackBase.PCard;
 import BlackJackBase.PDeck;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import static BlackJack.BJCard.*;
 
 public class BJDeck implements PDeck {
@@ -23,26 +25,30 @@ public class BJDeck implements PDeck {
 
     @Override
     public void shuffle() {
-
+        Collections.shuffle(cards);
     }
 
     @Override
     public void addCard(PCard card) {
-
+        cards.add((BJCard) card);
     }
 
     @Override
     public PCard dealCard() {
-        return null;
+        return cards != null ? cards.remove(cards.size() - 1) : null;
     }
 
     @Override
     public PCard dealHiddenCard() {
+        if (cards != null) {
+            cards.get(cards.size() - 1).hideCard();
+            cards.remove(cards.size() - 1);
+        }
         return null;
     }
 
     @Override
     public int cardCount() {
-        return 0;
+        return cards.size();
     }
 }

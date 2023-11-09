@@ -17,6 +17,10 @@ public class BJDeck implements PDeck {
         }
     }
 
+    public ArrayList<BJCard> getBJDeck(){
+        return cards;
+    }
+
     @Override
     public void shuffle() {
 

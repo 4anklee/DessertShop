@@ -40,9 +40,9 @@ public class BJDeck implements PDeck {
 
     @Override
     public PCard dealHiddenCard() {
-        if (cards != null) {
+        if (cards != null && !cards.isEmpty()) {
             cards.get(cards.size() - 1).hideCard();
-            cards.remove(cards.size() - 1);
+            return cards.remove(cards.size() - 1);
         }
         return null;
     }

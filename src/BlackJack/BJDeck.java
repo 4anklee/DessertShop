@@ -12,7 +12,7 @@ public class BJDeck implements PDeck {
     private final ArrayList<BJCard> cards;
 
     public BJDeck(){
-        cards = new ArrayList<>();
+        this.cards = new ArrayList<>();
         for(int suit : suits){
             for(int rank : ranks){
                 cards.add(new BJCard(suit, rank));
@@ -37,11 +37,11 @@ public class BJDeck implements PDeck {
 
     @Override
     public PCard dealHiddenCard() {
-        if (cards != null && !cards.isEmpty()) {
-            cards.get(cards.size() - 1).hideCard();
-            return cards.remove(cards.size() - 1);
+        BJCard card = (BJCard) dealCard();
+        if (card != null) {
+            card.hideCard();
         }
-        return null;
+        return card;
     }
 
     @Override

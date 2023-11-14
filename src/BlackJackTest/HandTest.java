@@ -9,7 +9,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
-import java.io.Serial;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -33,8 +32,8 @@ public class HandTest extends JPanel {
 
 	/**
 	 * Display a deck of cards in a window.
-	 *
-	 * @param hand
+	 * 
+	 * @param card
 	 *            The deck of cards to display.
 	 */
 	public static void run(PDeck deck, PHand hand) {
@@ -112,7 +111,6 @@ public class HandTest extends JPanel {
 				CARD_HEIGHT + metrics.getHeight() / 2 - metrics.getDescent());
 	}
 
-	@Serial
 	private static final long serialVersionUID = 3514525153815595242L;
 	private static final int CARD_WIDTH = 100;
 	private static final int CARD_HEIGHT = 150;

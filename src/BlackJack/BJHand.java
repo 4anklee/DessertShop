@@ -7,11 +7,10 @@ import static BlackJack.BJCard.*;
 import java.util.ArrayList;
 
 public class BJHand implements PHand {
-    ArrayList<BJCard> cards;
+    private final ArrayList<BJCard> cards;
     public BJHand() {
-        cards = new ArrayList<>();
+        this.cards = new ArrayList<>();
     }
-
 
     @Override
     public int getSize() {
@@ -33,13 +32,6 @@ public class BJHand implements PHand {
         return cards.remove(index);
     }
 
-    /** Returns the point value of the current hand.
-     *  Basic BlackJack rules apply:
-     *  Ranks 2 - 10 are valued at their face value
-     *  Ranks Jack - King are valued at 10
-     *  Ace is valued at 11 if the total value of all cards in the hand is <= 21
-     *  Otherwise, Ace is valued as 1
-     */
     @Override
     public int getValue() {
         int result = 0;

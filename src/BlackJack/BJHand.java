@@ -19,7 +19,9 @@ public class BJHand implements PHand {
 
     @Override
     public void addCard(PCard card) {
-        cards.add((BJCard) card);
+        if (card instanceof BJCard){
+            cards.add((BJCard) card);
+        }
     }
 
     @Override

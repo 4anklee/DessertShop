@@ -12,17 +12,17 @@ package BlackJackBase;
 public interface PDeck {
 
 	/** Randomizes the deck. */
-    void shuffle();
+    public void shuffle();
 
 	/** Adds a card to the end of the deck. */
-    void addCard(PCard card);
+    public void addCard(PCard card);
 
 	/** Removes a card from the end of the deck. Returns Null if the deck is empty.*/
-    PCard dealCard();
+    public PCard dealCard();
 
 	/** Removes a card from the end of the deck and marks it as hidden. Returns Null if the deck is empty.*/
-    PCard dealHiddenCard();
+    public PCard dealHiddenCard();
 
 	/** Returns the number of cards in the deck. */
-    int cardCount();
+    public int cardCount();
 }

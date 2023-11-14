@@ -31,7 +31,7 @@ public class DeckTest extends JPanel {
 	/**
 	 * Display a deck of cards in a window.
 	 * 
-//	 * @param card
+	 * @param deck
 	 *            The deck of cards to display.
 	 */
 	public static void run(PDeck deck) {

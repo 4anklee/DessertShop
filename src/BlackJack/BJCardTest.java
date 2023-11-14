@@ -59,7 +59,7 @@ class BJCardTest {
 
     @Test
     void getText() {
-        assertEquals("♣A", bjCard.getText());
+        assertEquals("A♣", bjCard.getText());
     }
 
     @Test

@@ -27,13 +27,13 @@ public class PlayBlackJack {
 //        run(bjDeck);
 
         BJHand bjHand = new BJHand();
-        bjHand.addCard(new BJCard(SPADE, ACE));
-        bjHand.addCard(new BJCard(DIAMOND, ACE));
-        bjHand.addCard(new BJCard(HEART, ACE));
-        bjHand.addCard(new BJCard(CLUB, ACE));
-        bjHand.addCard(new BJCard(CLUB, TWO));
-        bjHand.addCard(new BJCard(DIAMOND, TWO));
-        bjHand.addCard(new BJCard(SPADE, THREE));
+        bjHand.addCard(new BJCard(ACE, SPADE));
+        bjHand.addCard(new BJCard(ACE, DIAMOND));
+        bjHand.addCard(new BJCard(ACE, HEART));
+        bjHand.addCard(new BJCard(ACE, CLUB));
+        bjHand.addCard(new BJCard(TWO, CLUB));
+        bjHand.addCard(new BJCard(TWO, DIAMOND));
+        bjHand.addCard(new BJCard(THREE, SPADE));
         System.out.println(bjHand.getValue());
         run(bjDeck, bjHand);
 //        run(bjDeck);

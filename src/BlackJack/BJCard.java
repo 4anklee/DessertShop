@@ -29,9 +29,9 @@ public class BJCard extends PCard {
     public static final int[] suits = {CLUB, DIAMOND, HEART, SPADE};
     public static final int[] ranks = {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, KNIGHT, QUEEN, KING};
 
-    public BJCard(int suit, int rank){
-        this.suit = suit;
+    public BJCard(int rank, int suit){
         this.rank = rank;
+        this.suit = suit;
         this.hidden = false;
     }
     public int getSuit() {
@@ -87,7 +87,7 @@ public class BJCard extends PCard {
                 }
             }
         }
-        return suitText + rankText;
+        return rankText + suitText;
     }
 
     @Override

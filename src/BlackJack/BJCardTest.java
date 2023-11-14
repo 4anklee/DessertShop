@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BJCardTest {
 
-    BJCard bjCard;
+    private BJCard bjCard;
 
     @BeforeEach
     void setUp() {

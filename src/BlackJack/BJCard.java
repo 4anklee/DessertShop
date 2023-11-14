@@ -5,9 +5,9 @@ import BlackJackBase.PCard;
 import java.awt.*;
 
 public class BJCard extends PCard {
-    int suit;
-    int rank;
-    boolean hidden;
+    private int suit;
+    private int rank;
+    private boolean hidden;
     public static final int CLUB = 1;
     public static final int DIAMOND = 2;
     public static final int HEART = 3;

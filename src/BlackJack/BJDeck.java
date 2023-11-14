@@ -9,18 +9,15 @@ import java.util.Collections;
 import static BlackJack.BJCard.*;
 
 public class BJDeck implements PDeck {
-    ArrayList<BJCard> cards = new ArrayList<>();
+    private final ArrayList<BJCard> cards;
 
     public BJDeck(){
+        cards = new ArrayList<>();
         for(int suit : suits){
             for(int rank : ranks){
                 cards.add(new BJCard(suit, rank));
             }
         }
-    }
-
-    public ArrayList<BJCard> getBJDeck(){
-        return cards;
     }
 
     @Override

@@ -33,6 +33,7 @@ public class BJCard extends PCard {
         this.rank = rank;
         this.suit = suit;
         this.hidden = false;
+
     }
     public int getSuit() {
         return suit;
@@ -93,5 +94,20 @@ public class BJCard extends PCard {
     @Override
     public Color getFontColor(){
         return getSuit() == CLUB || getSuit() == SPADE ? Color.BLACK : Color.RED;
+    }
+
+    @Override
+    public Color getBackColor(){
+        return new Color(252, 239, 164);
+    }
+
+    @Override
+    public Color getBorderColor() {
+        return new Color(93, 92, 92);
+    }
+
+    @Override
+    public Color getStripeColor() {
+        return new Color(170, 238, 246);
     }
 }

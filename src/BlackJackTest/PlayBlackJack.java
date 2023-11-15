@@ -3,7 +3,9 @@ package BlackJackTest;
 import BlackJack.BJDeck;
 import BlackJack.BJHand;
 
-import static BlackJackTest.HandTest.run;
+import java.awt.*;
+
+import static BlackJackBase.PGame.*;
 
 public class PlayBlackJack {
     public static void main(String[] args) {
@@ -18,10 +20,21 @@ public class PlayBlackJack {
 //        for(BJCard card : cards){
 //            run(card);
 //        }
+        setBackgroundColor(new Color(248, 225, 237));
+        setBannerColor(Color.DARK_GRAY);
+        setBannerTextColor(Color.WHITE);
+        setStatusTextColor(new Color(120, 150, 162));
+        setButtonColor(new Color(245, 189, 119));
+        setButtonHighlightColor(new Color(229, 173, 252));
+        setButtonTextColor(Color.WHITE);
+        setFont("Times New Roman");
         BJDeck bjDeck = new BJDeck();
 //        run(bjDeck);
-
+//
         BJHand bjHand = new BJHand();
-        run(bjDeck, bjHand);
+//        run(bjDeck, bjHand);
+        BJHand bjDealer =new BJHand();
+        run(bjDeck, bjDealer, bjHand);
+
     }
 }

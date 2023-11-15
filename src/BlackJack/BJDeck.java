@@ -34,16 +34,23 @@ public class BJDeck implements PDeck {
 
     @Override
     public PCard dealCard() {
-        return !cards.isEmpty() ? cards.remove(cards.size() - 1) : null;
+        if (!cards.isEmpty()) {
+            PCard cardTobeRemoved = cards.get(cards.size() - 1);
+            return cards.remove(cards.size() - 1);
+//            return cardTobeRemoved;
+        }
+        return null;
     }
 
     @Override
     public PCard dealHiddenCard() {
-        BJCard card = (BJCard) dealCard();
-        if (card != null) {
-            card.hideCard();
+        if (!cards.isEmpty()) {
+            PCard cardTobeRemoved = cards.get(cards.size() - 1);
+            cardTobeRemoved.hideCard();
+            return cards.remove(cards.size() - 1);
+//            return cardTobeRemoved;
         }
-        return card;
+        return null;
     }
 
     @Override

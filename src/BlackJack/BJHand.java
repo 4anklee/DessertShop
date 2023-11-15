@@ -39,18 +39,18 @@ public class BJHand implements PHand {
         int result = 0;
         int numbersOfAce = 0;
         for(BJCard card : cards){
-            if (card.getRank() >= TEN) {
+            if (card.getRank() > TEN) {
                 result += TEN;
             }else if(card.getRank() == ACE){
-                result += ACE;
-                numbersOfAce += 1;
+                result += 11;
+                numbersOfAce ++;
             }else {
                 result += card.getRank();
             }
         }
-        while(result < 21 && numbersOfAce > 0){
+        while(result > 21 && numbersOfAce > 0){
             numbersOfAce -= 1;
-            result += 10;
+            result -= 10;
         }
         return result;
     }

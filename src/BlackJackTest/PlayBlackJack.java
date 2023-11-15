@@ -1,12 +1,8 @@
 package BlackJackTest;
 
-import BlackJack.BJCard;
 import BlackJack.BJDeck;
 import BlackJack.BJHand;
 
-import static BlackJack.BJCard.*;
-
-import static BlackJackTest.DeckTest.run;
 import static BlackJackTest.HandTest.run;
 
 
@@ -27,15 +23,6 @@ public class PlayBlackJack {
 //        run(bjDeck);
 
         BJHand bjHand = new BJHand();
-        bjHand.addCard(new BJCard(ACE, SPADE));
-        bjHand.addCard(new BJCard(ACE, DIAMOND));
-        bjHand.addCard(new BJCard(ACE, HEART));
-        bjHand.addCard(new BJCard(ACE, CLUB));
-        bjHand.addCard(new BJCard(TWO, CLUB));
-        bjHand.addCard(new BJCard(TWO, DIAMOND));
-        bjHand.addCard(new BJCard(THREE, SPADE));
-        System.out.println(bjHand.getValue());
         run(bjDeck, bjHand);
-//        run(bjDeck);
     }
 }

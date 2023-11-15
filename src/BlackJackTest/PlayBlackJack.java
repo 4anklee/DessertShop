@@ -5,7 +5,6 @@ import BlackJack.BJHand;
 
 import static BlackJackTest.HandTest.run;
 
-
 public class PlayBlackJack {
     public static void main(String[] args) {
 //        BJCard spadeAce = new BJCard(SPADE, ACE);

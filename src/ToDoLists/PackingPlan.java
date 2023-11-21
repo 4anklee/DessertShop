@@ -206,6 +206,7 @@ public class PackingPlan extends ToDo {
 			}
 		}
 		gear.put(item, current + change);
+		System.out.printf("\nThe '%s' item has been updated by %d.\n", item, change);
 	}//end of method change(String, int)
 	
 	/**

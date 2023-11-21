@@ -9,11 +9,9 @@
  */
 package ToDoLists;
 
-
 /*
  * Go to Window->Preferences->Java->Debug->Step Filtering and check all the boxes
  */
-
 
 import java.util.*;
 
@@ -330,7 +328,6 @@ public class Planner {
 		String item = getValidString(sIn, "Which item would you like to change?: ", "\nInvalid entry.  That is not an item in the plan.", choices );
 		int changeQty = getValidInt(sIn, "How many would you like to add or subtract?: ", "Invalid response.  Please enter a whole number.");
 		plan.change(item, changeQty);
-		System.out.printf("\nThe '%s' item has been updated by %d.\n", item, changeQty);		
 	}//end of method changeItemQty(Scanner, ToDo)
 	
 	

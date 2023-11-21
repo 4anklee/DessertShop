@@ -39,14 +39,13 @@ public class Planner {
 	public static void main(String[] args) {
 		Scanner sIn = new Scanner(System.in);	//Used for user input from the console.	
 		String choice;			//The user's choice returned from getCommand().
-		boolean done = false;	//while loop control.
-		
+
 		//Load Test Data.  Comment out before going to production.
 		loadTestData();
 		
 		//Present a menu to the user and call the associated method.
 		//Keep presenting the menu until the user decides to quit.
-		while(!done) {
+		while(true) {
 			choice = getCommand(sIn, "Main Menu", new String[]{"View Plans", "Create Plan", "Update Plan", "Exit"});
 			if (choice.equalsIgnoreCase("4")) {
 				break;
@@ -155,11 +154,10 @@ public class Planner {
 	 * @return		void
 	 */	
 	public static void viewModule(Scanner sIn) {
-		boolean done = false;	//while loop control.
 		ToDo selectedPlan;		//The plan the user would like to view.
 		
 		//Keep displaying this menu until the user chooses to exit.
-		while(!done) {
+		while(true) {
 			selectedPlan = getPlan(sIn);
 			if (selectedPlan == null) {
 				break;			//User selected No Plan.
@@ -179,10 +177,9 @@ public class Planner {
 	 */		
 	public static void createModule(Scanner sIn) {
 		String choice;			//The user's choice returned from getCommand().
-		boolean done = false;	//while loop control.
-		
+
 		//Keep displaying this menu until the user chooses to exit.
-		while(!done) {
+		while(true) {
 			choice = getCommand(sIn, "Create Plan Menu", new String[]{"Create New Packing Plan", "Create New Shopping Plan",});
 			if (choice.equalsIgnoreCase("")){
 				return;			//User chooses to exit.
@@ -422,7 +419,7 @@ public class Planner {
 		String input;					//Users input
 		int intNum=0;					//The integer var to hold the converted input
 		boolean validAnswer = false;	//do-while loop control
-		
+
 		//Keep asking question until the user enters valid input.
 		do {
 			System.out.print(question);

@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
 
-import static ToDoLists.Planner.getValidInt;
-
 /**
  * Class: PackingPlan.
  * Subclass for an instructive class hierarchy to teach debugging skills.
@@ -197,16 +195,13 @@ public class PackingPlan extends ToDo {
 	 */	
 	public void change(String item, int change) {
 		int current = gear.get(item);
-		while(current + change <= 0){
-			try{
-				throw new IllegalArgumentException();
-			}catch(IllegalArgumentException e) {
-				System.out.println("The quantity can't be negative.");
-				change = getValidInt(in, "How many would you like to add or subtract?: ", "Invalid response.  Please enter a whole number.");
-			}
+		if(current + change <= 0){
+			this.delete(item);
+			System.out.printf("\nThe '%s' item has been removed.\n", item);
+		}else {
+			gear.put(item, current + change);
+			System.out.printf("\nThe '%s' item has been updated by %d.\n", item, change);
 		}
-		gear.put(item, current + change);
-		System.out.printf("\nThe '%s' item has been updated by %d.\n", item, change);
 	}//end of method change(String, int)
 	
 	/**

@@ -1,5 +1,6 @@
 package RealEstate;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class REO {
@@ -60,7 +61,7 @@ public class REO {
                                     Current listings for REO:
                                     %s
                                     """, listingsDB);
-                            case "3" -> System.out.println("Auto Populate Listings (Dev tool)");
+                            case "3" -> autoPopulate();
                             case "" -> {}
                             default -> System.out.println("Invalid response!");
                         }
@@ -82,9 +83,9 @@ public class REO {
                                 What would you like to do? (1-3):\s""");
                         bidChoices = in.nextLine().trim();
                         switch (bidChoices){
-                            case "1" -> System.out.println("Add New Bid");
-                            case "2" -> System.out.println("Show Existing Bids");
-                            case "3" -> System.out.println("Auto Populate Bids (Dev Tool)");
+                            case "1" -> addBid();
+                            case "2" -> showBid();
+                            case "3" -> {}
                             case "" -> {}
                             default -> System.out.println("Invalid response!");
                         }
@@ -166,6 +167,66 @@ public class REO {
         House house5 = new House("1220 Apple", "84057", 8, 7, 7900, 1, 0, 0);
         house5.setListPrice(house5.calculateAppraisalPrice() * 1.1);
         listingsDB.addListing("1220 Apple", house5);
+
+        System.out.println("8 residences have been added to the listings for testing purposes.");
+    }
+
+    public static void addBid(){
+        do {
+            int num = 1;
+            System.out.printf("%-20s%5s", "No.", "Property (bids)\n");
+            System.out.println("---------------------------");
+            for (Residential listing : listingsDB.getListings().values()) {
+                System.out.printf("%-3s%-20s%5s\n", String.format("%d.", num), listing.getStreetAddress(), String.format("(%d)", listing.getBidCount()));
+                num++;
+            }
+            System.out.println("ENTER: Exit back to the previous menu.");
+            int index = IntegerInputValidation("For which property would you like to add a bid?: ");
+            int i = 1;
+            String result = null;
+            for (String address : listingsDB.getListings().keySet()) {
+                if (index == i) {
+                    result = address;
+                }
+                i++;
+            }
+            System.out.println(getResidential(result));
+            getResidential(result).newBid(StringInputValidation("Please enter the name of the bidder: "),
+                    DoubleInputValidation("Please enter the new bid: $"));
+            System.out.printf("New bid for property '%s' added.\n", listingsDB.listings.get(result).getStreetAddress());
+        }while(in.nextLine().isEmpty());
+    }
+
+    public static void showBid(){
+        int num = 1;
+        System.out.printf("%-20s%5s", "No", "Property (bids)\n");
+        System.out.println("---------------------------");
+        for(Residential listing : listingsDB.getListings().values()){
+            System.out.printf("%-3d.%-20s%5s", num, listing.getStreetAddress(), String.format("(%d)",listing.getBidCount()));
+            num++;
+        }
+        System.out.println("ENTER: Exit back to the previous menu.");
+        int index = IntegerInputValidation("For which property would you like to see the current bids?: ");
+        int i = 1;
+        String result = null;
+        for(String address : listingsDB.getListings().keySet()){
+            if(index == i){
+                result = address;
+            }
+            i++;
+        }
+        System.out.println(getResidential(result));
+        System.out.println("Current bids for this listing: ");
+        System.out.println("---------------------------------------------");
+        System.out.printf("%-10s%-10s", "Bidder", "Bid");
+        System.out.println("---------------------------------------------");
+        for(Map.Entry<String, Double> entry : getResidential(result).getBids().entrySet()){
+            System.out.printf("%-10s%-10s", entry.getKey(), entry.getValue() );
+        }
+    }
+
+    private static Residential getResidential(String result) {
+        return listingsDB.getListings().get(result);
     }
 
     public static String StringInputValidation(String prompt) {
@@ -201,3 +262,4 @@ public class REO {
         }
     }
 }
+

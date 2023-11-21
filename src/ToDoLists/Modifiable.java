@@ -37,8 +37,8 @@ public interface Modifiable {
 	 * Returns a HashMap<String, Integer> containing a list of items (key) and their associated quantities (value).
 	 *
 	 * @return	HashMap<String, Integer>.
-	 */	
-	public HashMap<String, Integer> getMap();
+	 */
+    HashMap<String, Integer> getMap();
 
 	
 	/**
@@ -47,24 +47,24 @@ public interface Modifiable {
 	 *
 	 * @param	item	The key to the HashMap(String, Integer).
 	 * @return			A boolean indicating if the key is in the HashMap. 
-	 */		
-	public boolean hasItem(String item);
+	 */
+    boolean hasItem(String item);
 	
 	
 	/**
 	 * Returns the Set<String> of keys from a HashMap<String, Integer>.
 	 *
 	 * @return	Set<String> of keys from a HashMap<String, Integer>.
-	 */		
-	public Set<String> getItems();
+	 */
+    Set<String> getItems();
 	
 	
 	/**
 	 * Returns the Collection<Integers> of values from a HashMap<String, Integer>.
 	 *
 	 * @return	Collection<Integers> of values from a HashMap<String, Integer>.
-	 */	
-	public Collection<Integer> getAmounts();
+	 */
+    Collection<Integer> getAmounts();
 	
 	
 	/**
@@ -73,8 +73,8 @@ public interface Modifiable {
 	 *
 	 * @param	item	The key to the HashMap(String, Integer).
 	 * @return			The value for the associated key in the HashMap. 
-	 */	
-	public int getAmount(String item);
+	 */
+    int getAmount(String item);
 	
 	
 	/**
@@ -84,8 +84,8 @@ public interface Modifiable {
 	 * @param	item		The key to the new entry in HashMap(String, Integer).
 	 * @param	quantity	The value for the new entry in HashMap(String, Integer).
 	 * @return				void 
-	 */		
-	public void add(String item, int quantity);
+	 */
+    void add(String item, int quantity);
 	
 	
 	/**
@@ -95,8 +95,8 @@ public interface Modifiable {
 	 * @param	item	The key to the entry in HashMap(String, Integer) that needs to be modified.
 	 * @param	change	The amount the existing value needs to change.
 	 * @return			void 
-	 */	
-	public void change(String item, int change);
+	 */
+    void change(String item, int change);
 	
 	
 	/**
@@ -105,14 +105,14 @@ public interface Modifiable {
 	 *
 	 * @param	item	The key to the entry in the HashMap(String, Integer) that will be deleted.
 	 * @return			void 
-	 */	
-	public void delete(String item);	
+	 */
+    void delete(String item);
 
 	/**
 	 * Returns an int indicating how many entries are in the HashMap<String, Integer>.
 	 *
 	 * @return	int indicating how many entries are in the HashMap<String, Integer>.
-	 */	
-	public int getSize();
+	 */
+    int getSize();
 	
 }//end of interface Modifiable

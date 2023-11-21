@@ -27,7 +27,7 @@ import java.util.*;
  */
 public class Planner {
 	//Attributes
-	private static ArrayList<ToDo> plans = new ArrayList<ToDo>();			//An ArrayList of ToDo plans.  These plans will be either Packing Plans or Shopping Plans.
+	private static final ArrayList<ToDo> plans = new ArrayList<>();			//An ArrayList of ToDo plans.  These plans will be either Packing Plans or Shopping Plans.
 	
 	/**
 	 * Main method to launch a Planning application.
@@ -82,7 +82,7 @@ public class Planner {
 		PackingPlan p1 = new PackingPlan("June Silver Lake", "Silver Lake", 7, "Camping");
 		p1.add("Tent", 3);
 		p1.add("First Aid Kit", 1);
-		p1.add("Bear Repelant", 4);
+		p1.add("Bear Repellent", 4);
 		p1.add("Fishing Poles", 7);
 		p1.add("Canteen", 10);
 		p1.add("Folding Chairs", 5);
@@ -118,7 +118,7 @@ public class Planner {
 		s2.add("Oak 1x8x76", 3);
 		s2.add("Drill", 1);
 		s2.add("Phillips Bits", 10);
-		s2.add("Shelf Supposrt", 6);
+		s2.add("Shelf Support", 6);
 		s2.add("Measuring Tape", 1);
 		s2.add("2' Level", 1);
 		plans.add(s2);
@@ -290,7 +290,7 @@ public class Planner {
 
 	/**
 	 * Returns void.
-	 * Allows the user to add an item to the selectedplan.
+	 * Allows the user to add an item to the selected-plan.
 	 * 
 	 * @param	sIn		A Scanner object used to get user input.
 	 * @param	plan	A ToDo object to be modified.
@@ -327,7 +327,7 @@ public class Planner {
 			choices[index++] = item;
 		}//end of for(String item : itemList)
 		
-		String item = getValidString(sIn, "Which item would you like to change?: ", "\nInvalid entery.  That is not an item in the plan.", choices );
+		String item = getValidString(sIn, "Which item would you like to change?: ", "\nInvalid entry.  That is not an item in the plan.", choices );
 		int changeQty = getValidInt(sIn, "How many would you like to add or subtract?: ", "Invalid response.  Please enter a whole number.");
 		plan.change(item, changeQty);
 		System.out.printf("\nThe '%s' item has been updated by %d.\n", item, changeQty);		
@@ -373,8 +373,8 @@ public class Planner {
 		boolean done = false;	//while loop control.
 		ToDo selectedPlan;		//The plan the user would like to view.
 		int cmd;				//The menu option number the user will enter to make a selection.
-		HashMap<String, ToDo> menuMap = new HashMap<String, ToDo>();	//Holds the menu entries.  Associates a menu option number with a plan object.		
-				
+		HashMap<String, ToDo> menuMap = new HashMap<>();	//Holds the menu entries.  Associates a menu option number with a plan object.
+
 		//Keep displaying this menu until the user chooses to exit.
 		while(!done) {
 			System.out.println("\nCurrent Plans:\n");
@@ -390,11 +390,11 @@ public class Planner {
 				System.out.printf("%d:  %-28s (%d)\n", cmd, plan.getTitle(), plan.getToDoID());
 				cmd++;
 			}//end of for(ToDo plan : plans)
-			System.out.printf("ENTER: Exit back to previous menu\n\n");				
+			System.out.print("ENTER: Exit back to previous menu\n\n");
 			System.out.print("Which plan?: ");			
 			choice = sIn.nextLine();
 			
-			if(choice.equals("")) {
+			if(choice.isEmpty()) {
 				done = true;	//User chooses to exit.
 			} else {
 				selectedPlan = menuMap.get(choice);
@@ -495,13 +495,13 @@ public class Planner {
 		System.out.printf(format, title);
 		System.out.println("----------------------------------------");
 		
-		int i = 0;
+		int i;
 		for(i = 0; i < menu.length; i++) {
 			System.out.printf("%d: %s\n", i+1, menu[i]);
 		}//end of for(i = 0; i < menu.length; i++)
 		
 		if(!title.equalsIgnoreCase("Main Menu")) {
-			System.out.printf("ENTER: Exit back to previous menu\n");			
+			System.out.print("ENTER: Exit back to previous menu\n");
 		}//end of if(!title.equalsIgnoreCase("Main Menu"))
 		System.out.printf("\nWhat would you like to do? (1-%d): ", i);
 		return sIn.nextLine();

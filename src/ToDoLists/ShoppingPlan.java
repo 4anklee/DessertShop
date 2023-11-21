@@ -24,29 +24,29 @@ import static ToDoLists.Planner.getValidInt;
  * @since 11/17/2019
  */
 public class ShoppingPlan extends ToDo {
-	private Scanner in = new Scanner(System.in);
+	private final Scanner in = new Scanner(System.in);
 	//Attributes
-	private HashMap<String, Integer> items;		//HashMap that holds the items needed(key) and their quantities(value) for a Shopping Plan
+	private final HashMap<String, Integer> items;		//HashMap that holds the items needed(key) and their quantities(value) for a Shopping Plan
 	private String shoppingType;				//Describes the type of shopping to be done.  E.g. "Groceries", "Home Improvement", "Crafts", etc.
 	
 	//Constructors
 	/**
 	 * Default Constructor.  Not intended for normal use.
 	 * Sets all class attributes to their default values based on type.
-	 * Instantiates a new items HashMap(String, Integer>.
-	 * 
+	 * Instantiates a new items HashMap(String, Integer).
+	 *
 	 * @return	void
 	 */
 	public ShoppingPlan() {
 		super();
 		shoppingType = "";
-		items = new HashMap<String, Integer>();
+		items = new HashMap<>();
 	}//end of constructor ShoppingPlan()
 	
 	/**
 	 * Primary Constructor.
 	 * Sets all class attributes to their default values based on type.
-	 * Instantiates a new items HashMap(String, Integer>.
+	 * Instantiates a new items HashMap(String, Integer).
 	 * 
 	 * @param	t		The title of a ToDo list object.  User created through a user interface.
 	 * @param	type	The type of shopping being planned.  Ex: "Groceries", "Home Improvement", "Crafts", etc. User created through a user interface.
@@ -55,8 +55,8 @@ public class ShoppingPlan extends ToDo {
 	public ShoppingPlan(String t, String type) {
 		super(t);
 		shoppingType = type;
-		items = new HashMap<String, Integer>();
-	}//end of constructor ShoppingPlan(String)	
+		items = new HashMap<>();
+	}//end of constructor ShoppingPlan(String)
 	
 	
 	//Methods
@@ -96,11 +96,9 @@ public class ShoppingPlan extends ToDo {
 	 * @return			A boolean indicating if the key is in the HashMap. 
 	 */	
 	public boolean hasItem(String item) {
-		if(items.containsKey(item)) {
-			return true;
-		}//end of if(gear.containsKey(item))
-		return false;
-	}//end of method hasItem(String)
+        //end of if(gear.containsKey(item))
+        return items.containsKey(item);
+    }//end of method hasItem(String)
 	
 	/**
 	 * Returns the Set<String> of keys from a HashMap<String, Integer>.
@@ -190,15 +188,15 @@ public class ShoppingPlan extends ToDo {
 	 * @return	String that represents the Shopping Plan in a readable format.
 	 */
 	public String toString() {
-		String text = "";
-		text = text + "\n--------------------------------------\n";
-		text = text + String.format("%-25s%s\n",this.getTitle(), this.shoppingType);
-		text = text + "--------------------------------------\n";		
+		StringBuilder text = new StringBuilder();
+		text.append("\n--------------------------------------\n");
+		text.append(String.format("%-25s%s\n", this.getTitle(), this.shoppingType));
+		text.append("--------------------------------------\n");
 		for(String item : items.keySet()) {
-			text = text + String.format("  %-20s%8d\n",item, this.getAmount(item)); 
+			text.append(String.format("  %-20s%8d\n", item, this.getAmount(item)));
 		}//end of for(String item : items.keySet())
-		text = text + "--------------------------------------";				
-		return text;
+		text.append("--------------------------------------");
+		return text.toString();
 	}//end of method toString()
 	
 }//end of class ShoppingPlan

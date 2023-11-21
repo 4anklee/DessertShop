@@ -24,9 +24,9 @@ import static ToDoLists.Planner.getValidInt;
  * @since 11/17/2019
  */
 public class PackingPlan extends ToDo {
-	private Scanner in = new Scanner(System.in);
+	private final Scanner in = new Scanner(System.in);
 	//Attributes
-	private HashMap<String, Integer> gear;		//HashMap that holds the items needed(key) and their quantities(value) for a Packing Plan
+	private final HashMap<String, Integer> gear;		//HashMap that holds the items needed(key) and their quantities(value) for a Packing Plan
 	private String destination;					//Destination of the trip
 	private int travelers;						//How many travelers will be going on the trip
 	private String tripType;					//Type of trip. E.g. "Business", "Vacation", "Sports", etc.
@@ -35,7 +35,7 @@ public class PackingPlan extends ToDo {
 	/**
 	 * Default Constructor.  Not intended for normal use.
 	 * Sets all class attributes to their default values based on type.
-	 * Instantiates a new gear HashMap(String, Integer>.
+	 * Instantiates a new gear HashMap(String, Integer).
 	 * 
 	 * @return	void
 	 */
@@ -44,13 +44,13 @@ public class PackingPlan extends ToDo {
 		destination = "";
 		travelers = 1;
 		tripType = "";
-		gear = new HashMap<String, Integer>();
+		gear = new HashMap<>();
 	}//end of constructor PackingPlan()
 
 	/**
 	 * Primary Constructor.
 	 * Sets all class attributes to their default values based on type.
-	 * Instantiates a new gear HashMap(String, Integer>.
+	 * Instantiates a new gear HashMap(String, Integer).
 	 * 
 	 * @param	t		The title of a ToDo list object.  User created through a user interface.
 	 * @param	d		The destination of a Packing Plan.  User created through a user interface.
@@ -63,7 +63,7 @@ public class PackingPlan extends ToDo {
 		destination = d;
 		travelers = people;
 		tripType = type;
-		gear = new HashMap<String, Integer>();
+		gear = new HashMap<>();
 	}//end of constructor PackingPlan(String)	
 	
 	
@@ -142,11 +142,9 @@ public class PackingPlan extends ToDo {
 	 * @return			A boolean indicating if the key is in the HashMap. 
 	 */	
 	public boolean hasItem(String item) {
-		if(gear.containsKey(item)) {
-			return true;
-		}//end of if(gear.containsKey(item))
-		return false;
-	}//end of method hasItem(String)
+        //end of if(gear.containsKey(item))
+        return gear.containsKey(item);
+    }//end of method hasItem(String)
 	
 	/**
 	 * Returns the Set<String> of keys from a HashMap<String, Integer>.
@@ -239,12 +237,13 @@ public class PackingPlan extends ToDo {
 		String text = "";
 		text = text + "\n------------------------------------------\n";
 		text = text + String.format("%-28sFor: %s\n",this.getTitle(), this.getTripType());
-		text = text + String.format("%-28sTravelers: %d\n",("To: " + this.getDestination()), this.getTravelers());		
-		text = text + "------------------------------------------\n";		
-		for(String item : gear.keySet()) {
-			text = text + String.format("  %-20s%8d\n",item, this.getAmount(item)); 
+		text = text + String.format("%-28sTravelers: %d\n",("To: " + this.getDestination()), this.getTravelers());
+        StringBuilder textBuilder = new StringBuilder(text + "------------------------------------------\n");
+        for(String item : gear.keySet()) {
+			textBuilder.append(String.format("  %-20s%8d\n", item, this.getAmount(item)));
 		}//end of for(String item : gear.keySet())
-		text = text + "------------------------------------------";				
+        text = textBuilder.toString();
+        text = text + "------------------------------------------";
 		return text;
 	}//end of method toString()
 	

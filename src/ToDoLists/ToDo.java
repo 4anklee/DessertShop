@@ -21,7 +21,7 @@ import java.util.Set;
 public abstract class ToDo implements Modifiable, Comparable<ToDo> {
 	//Attributes
 	private String title;				//Title of the ToDo plan
-	private int toDoID;					//ID of the ToDo plan
+	private final int toDoID;					//ID of the ToDo plan
 	private static int nextToDoID=1;	//Holds the next ID for the class.
 	
 	

@@ -172,7 +172,7 @@ public class REO {
     }
 
     public static void addBid(){
-        do {
+        while(true) {
             int num = 1;
             System.out.printf("%-20s%5s", "No.", "Property (bids)\n");
             System.out.println("---------------------------");
@@ -182,6 +182,9 @@ public class REO {
             }
             System.out.println("ENTER: Exit back to the previous menu.");
             int index = IntegerInputValidation("For which property would you like to add a bid?: ");
+            if(index == -1){
+                return;
+            }
             int i = 1;
             String result = null;
             for (String address : listingsDB.getListings().keySet()) {
@@ -194,7 +197,7 @@ public class REO {
             getResidential(result).newBid(StringInputValidation("Please enter the name of the bidder: "),
                     DoubleInputValidation("Please enter the new bid: $"));
             System.out.printf("New bid for property '%s' added.\n", listingsDB.listings.get(result).getStreetAddress());
-        }while(in.nextLine().isEmpty());
+        }
     }
 
     public static void showBid(){

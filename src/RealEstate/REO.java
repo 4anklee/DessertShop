@@ -1,7 +1,8 @@
 package RealEstate;
 
-import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class REO {
     public static Scanner in = new Scanner(System.in);
@@ -182,9 +183,6 @@ public class REO {
             }
             System.out.println("ENTER: Exit back to the previous menu.");
             int index = IntegerInputValidation("For which property would you like to add a bid?: ");
-            if(index == -1){
-                return;
-            }
             int i = 1;
             String result = null;
             for (String address : listingsDB.getListings().keySet()) {
@@ -201,30 +199,44 @@ public class REO {
     }
 
     public static void showBid(){
-        int num = 1;
-        System.out.printf("%-20s%5s", "No", "Property (bids)\n");
-        System.out.println("---------------------------");
-        for(Residential listing : listingsDB.getListings().values()){
-            System.out.printf("%-3d.%-20s%5s", num, listing.getStreetAddress(), String.format("(%d)",listing.getBidCount()));
-            num++;
-        }
-        System.out.println("ENTER: Exit back to the previous menu.");
-        int index = IntegerInputValidation("For which property would you like to see the current bids?: ");
-        int i = 1;
-        String result = null;
-        for(String address : listingsDB.getListings().keySet()){
-            if(index == i){
-                result = address;
+        while(true) {
+            int num = 1;
+            System.out.printf("%-20s%5s", "No", "Property (bids)\n");
+            System.out.println("---------------------------");
+            for (Residential listing : listingsDB.getListings().values()) {
+                System.out.printf("%-3d.%-20s%5s", num, listing.getStreetAddress(), String.format("(%d)", listing.getBidCount()));
+                num++;
             }
-            i++;
-        }
-        System.out.println(getResidential(result));
-        System.out.println("Current bids for this listing: ");
-        System.out.println("---------------------------------------------");
-        System.out.printf("%-10s%-10s", "Bidder", "Bid");
-        System.out.println("---------------------------------------------");
-        for(Map.Entry<String, Double> entry : getResidential(result).getBids().entrySet()){
-            System.out.printf("%-10s%-10s", entry.getKey(), entry.getValue() );
+            System.out.println("ENTER: Exit back to the previous menu.");
+            System.out.println("For which property would you like to see the current bids?: ");
+
+            String index = in.nextLine();
+
+            if (index.isEmpty()) {
+                return;
+            }
+
+            Pattern pattern = Pattern.compile("T(\\d+)");
+            Matcher matcher = pattern.matcher(index);
+            if (matcher.find()) {
+                int i = 1;
+                String result = null;
+                int selectedNumber = Integer.parseInt(matcher.group(1));
+                for (String address : listingsDB.getListings().keySet()) {
+                    if (selectedNumber == i) {
+                        result = address;
+                        break;
+                    }
+                    i++;
+                }
+                if (result != null) {
+                    System.out.println(getResidential(result));
+                } else {
+                    System.out.println("Invalid number");
+                }
+            } else {
+                System.out.println("Invalid input");
+            }
         }
     }
 

@@ -60,7 +60,7 @@ public class REO {
                                     Current listings for REO:
                                     %s
                                     """, listingsDB);
-                            case "3" -> autoPopulate();
+                            case "3" -> System.out.println("Auto Populate Listings (Dev tool)");
                             case "" -> {}
                             default -> System.out.println("Invalid response!");
                         }

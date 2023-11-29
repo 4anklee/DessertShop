@@ -2,7 +2,10 @@ package Draw12a;
 
 import javax.swing.*;
 import java.awt.*;
+<<<<<<< HEAD
 import java.io.Serial;
+=======
+>>>>>>> Lab11i
 
 /**
  * Class used to create a DrawPanel where shapes will be drawn by the programmer (via code).
@@ -15,7 +18,10 @@ import java.io.Serial;
  */
 public class DrawPanel extends JPanel {
 	//Attributes
+<<<<<<< HEAD
 	@Serial
+=======
+>>>>>>> Lab11i
 	private static final long serialVersionUID = 6311020027600344213L;
 
 	public DrawPanel() {
@@ -40,6 +46,7 @@ public class DrawPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;			//Allows us to draw using both the Graphics class methods and the Graphics2D class methods
 
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);	//Makes drawn shapes and fonts clearer
+<<<<<<< HEAD
 
 		g2.setColor(new Color(241, 205, 205));
 		g2.setStroke(new BasicStroke(3));
@@ -80,6 +87,9 @@ public class DrawPanel extends JPanel {
 		g2.draw(EmptyPentagon);
 
 
+=======
+		
+>>>>>>> Lab11i
 		/*
 		 * Use this section to write your code.
 		 * DrawShapes

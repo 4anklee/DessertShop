@@ -6,11 +6,12 @@
  */
 package DessertShop;
 
+import DessertShop.Payable.PayType;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import DessertShop.Payable.PayType;
 
 
 public class DessertShop {
@@ -59,7 +60,6 @@ public class DessertShop {
             IceCream pistachio = new IceCream("Pistachio", 2, 0.79);
 //            Sundae vanilla = new Sundae("Vanilla", 3, 0.69, "Hot Fudge", 1.29);
             Cookie oatmealRaisin = new Cookie("Oatmeal Raisin", 2, 3.45);
-
 
             order.add(gummyBears, pistachio, oatmealRaisin);
 

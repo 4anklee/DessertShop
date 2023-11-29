@@ -48,6 +48,7 @@ public class Listings implements Listable{
         for(Residential listing : listings.values()){
             result.append(String.format("Listing No: %d\n", listingNo));
             result.append(listing);
+            result.append("\n");
             listingNo++;
         }
         return result.toString();

@@ -48,8 +48,8 @@ public class House extends Residential {
                 Bathroom: %d
                 Yard Size(Acres): %.2f
                 -----------------------------------------
-                Appraisal Price: %.2f
-                List Price: %.2f
+                Appraisal Price: $%,.2f
+                List Price: $%,.2f
                 -----------------------------------------
                 """, getStreetAddress(), getZip(),
                 getSqFootage(),

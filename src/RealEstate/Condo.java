@@ -44,8 +44,8 @@ public class Condo extends Residential {
                 Bathroom: %d
                 Floor: %d
                 -----------------------------------------
-                Appraisal Price: %.2f
-                List Price: %.2f
+                Appraisal Price: $%,.2f
+                List Price: $%,.2f
                 -----------------------------------------
                 """, getStreetAddress(), getZip(),
                 getSqFootage(),

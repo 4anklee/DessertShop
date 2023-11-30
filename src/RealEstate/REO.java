@@ -1,6 +1,10 @@
 package RealEstate;
 
+import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class REO {
     public static Scanner in = new Scanner(System.in);
@@ -57,10 +61,10 @@ public class REO {
                                 }while(!addListingChoices.isEmpty());
                             }
                             case "2" -> System.out.printf("""
+                                    
                                     Current listings for REO:
-                                    %s
-                                    """, listingsDB);
-                            case "3" -> System.out.println("Auto Populate Listings (Dev tool)");
+                                    %s""", listingsDB);
+                            case "3" -> autoPopulate();
                             case "" -> {}
                             default -> System.out.println("Invalid response!");
                         }
@@ -69,7 +73,7 @@ public class REO {
                 case "2" ->{
                     String bidChoices;
                     do {
-                        System.out.println("""
+                        System.out.print("""
                                 
                                 -----------------------------------------
                                                  Bid Menu
@@ -77,14 +81,14 @@ public class REO {
                                 1: Add New Bid
                                 2: Show Existing Bids
                                 3: Auto Populate Bids (Dev Tool)
-                                ENTER：EXIt Dock to previous menu
+                                ENTER：Exit back to previous menu
                                 
                                 What would you like to do? (1-3):\s""");
                         bidChoices = in.nextLine().trim();
                         switch (bidChoices){
-                            case "1" -> System.out.println("Add New Bid");
-                            case "2" -> System.out.println("Show Existing Bids");
-                            case "3" -> System.out.println("Auto Populate Bids (Dev Tool)");
+                            case "1" -> addBid();
+                            case "2" -> showBid();
+                            case "3" -> autoPopulateBid();
                             case "" -> {}
                             default -> System.out.println("Invalid response!");
                         }
@@ -165,6 +169,128 @@ public class REO {
         House house5 = new House("1220 Apple", "84057", 8, 7, 7900, 1, 0, 0);
         house5.setListPrice(house5.calculateAppraisalPrice() * 1.1);
         listingsDB.addListing("1220 Apple", house5);
+
+        System.out.println("8 residences have been added to the listings for testing purposes.");
+    }
+
+    public static void addBid(){
+        while(true) {
+            int num = 1;
+            System.out.println("\nCurrent Listings for REO: ");
+            System.out.printf("%-20s%5s", "No.", "Property (bids)\n");
+            System.out.println("--------------------------------------");
+            for (Residential listing : listingsDB.getListings().values()) {
+                System.out.printf("%-3s%-20s%5s\n", String.format("%d.", num), listing.getStreetAddress(), String.format("(%d)", listing.getBidCount()));
+                num++;
+            }
+            System.out.println("ENTER: Exit back to the previous menu.");
+            System.out.print("For which property would you like to add a bid?: ");
+            String index = in.nextLine();
+            if (index.isEmpty()) {
+                return;
+            }else {
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(index);
+                if (matcher.find()) {
+                    int i = 1;
+                    String result = null;
+                    int selectedNumber = Integer.parseInt(matcher.group());
+                    for (String address : listingsDB.getListings().keySet()) {
+                        if (selectedNumber == i) {
+                            result = address;
+                            break;
+                        }
+                        i++;
+                    }
+                    if (result != null) {
+                        System.out.println("\n" + getResidential(result));
+                        getResidential(result).newBid(StringInputValidation("Please enter the name of the bidder: "),
+                                DoubleInputValidation("Please enter the new bid: $"));
+                        System.out.printf("New bid for property '%s' added.\n", listingsDB.listings.get(result).getStreetAddress());
+                    } else {
+                        System.out.println("Invalid number");
+                    }
+                } else {
+                    System.out.println("Invalid input");
+                }
+            }
+        }
+    }
+
+    public static void showBid(){
+        while(true) {
+            int num = 1;
+            System.out.println("\nCurrent Listings for REO: ");
+            System.out.printf("%-20s%5s", "No.", "Property (bids)\n");
+            System.out.print("--------------------------------------\n");
+            for (Residential listing : listingsDB.getListings().values()) {
+                System.out.printf("%-3s%-20s%5s\n", String.format(num + "."), listing.getStreetAddress(), String.format("(%d)", listing.getBidCount()));
+                num++;
+            }
+            System.out.println("ENTER: Exit back to the previous menu.\n");
+            System.out.print("For which property would you like to see the current bids?: ");
+
+            String index = in.nextLine();
+
+            if (index.isEmpty()) {
+                return;
+            }else {
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(index);
+                if (matcher.find()) {
+                    int i = 1;
+                    String result = null;
+                    int selectedNumber = Integer.parseInt(matcher.group());
+                    for (String address : listingsDB.getListings().keySet()) {
+                        if (selectedNumber == i) {
+                            result = address;
+                            break;
+                        }
+                        i++;
+                    }
+                    if (result != null) {
+                        System.out.println("\n" + getResidential(result));
+                        System.out.printf("""
+                                Current bids for this listing:
+                                ----------------------------------
+                                %-20s%-20s
+                                ----------------------------------
+                                """, "Bidder", "Bid");
+                        for(Map.Entry<String, Double> bid : getResidential(result).getBids().entrySet()){
+                            System.out.printf("%-20s$%,-20.2f\n", bid.getKey(), bid.getValue());
+                        }
+                    } else {
+                        System.out.println("Invalid number");
+                    }
+                } else {
+                    System.out.println("Invalid input");
+                }
+            }
+        }
+    }
+
+    public static void autoPopulateBid(){
+        var random = new Random();
+        String[] autoBidders = {"Patric Stewart","Walter Koenig","William Shatner","Leonard Nimoy","DeForect Kelley","James Doohan","George Takei","Majel Barrett","Nichelle Nichol","Jonathan Frank"
+                ,"Marina Sirtis","Brent Spiner","Gates McFadden","Michael Dorn","LeVar Burton","Wil Wheaton","Colm Meaney","Michelle Forbes"};
+        for (String address : listingsDB.getListings().keySet()) {
+            int numBids = random.nextInt(10) + 1;
+            for (int j = 0; j < numBids; j++) {
+                int bidderIndex = random.nextInt(autoBidders.length);
+
+                double maxBid = getResidential(address).calculateAppraisalPrice() * 1.1;
+                double minBid = getResidential(address).calculateAppraisalPrice() * 0.9;
+                double bidAmount = Math.round(minBid + random.nextDouble() * (maxBid - minBid));
+
+                getResidential(address).newBid(autoBidders[bidderIndex], bidAmount);
+            }
+            System.out.printf("\n%d new bids have been added to listing %s.", numBids, address);
+        }
+        System.out.print("\n");
+    }
+
+    private static Residential getResidential(String result) {
+        return listingsDB.getListings().get(result);
     }
 
     public static String StringInputValidation(String prompt) {
@@ -200,3 +326,4 @@ public class REO {
         }
     }
 }
+

@@ -61,10 +61,10 @@ public class DrawPanel extends JPanel {
 		g2.draw(EmptyTriangle);
 
 		var Triangle = regPolygon(600, 100, 50, 3);
-		g2.rotate(90, 600, 100);
+		g2.rotate(70, 600, 100);
 		g2.fill(Triangle);
 		g2.draw(Triangle);
-		g2.rotate(-90, 600, 100);
+		g2.rotate(-70, 600, 100);
 
 		//Circles
 		g2.setColor(new Color(255, 239, 140));

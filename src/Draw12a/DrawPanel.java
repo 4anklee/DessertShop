@@ -2,6 +2,7 @@ package Draw12a;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.io.Serial;
 
 /**
@@ -41,44 +42,77 @@ public class DrawPanel extends JPanel {
 
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);	//Makes drawn shapes and fonts clearer
 
+		//Heptagon
 		g2.setColor(new Color(241, 205, 205));
 		g2.setStroke(new BasicStroke(3));
-		g2.drawRect(50, 50, 50, 50);
+		var emptyHeptagon = regPolygon(100, 100, 50, 7);
+		g2.draw(emptyHeptagon);
 
-//		g2.setColor(new Color(241, 205, 205));
-//		g2.setStroke(new BasicStroke(1));
-//		g2.drawRect(200, 50, 50, 50);
-		g2.fillRect(200, 50, 50, 50);
+		var heptagon = regPolygon(250, 100, 50, 7);
+		g2.rotate(90, 250, 100);
+		g2.fill(heptagon);
+		g2.draw(heptagon);
+		g2.rotate(-90, 250, 100);
 
+		//Triangles
 		g2.setColor(new Color(243, 193, 135));
 		g2.setStroke(new BasicStroke(3));
-		var EmptyTriangle = new Polygon(new int[]{350, 400, 450}, new int[]{140, 50, 140}, 3);
+		var EmptyTriangle = regPolygon(400, 100, 50, 3);
 		g2.draw(EmptyTriangle);
 
-		var Triangle = new Polygon(new int[]{600, 650, 700}, new int[]{50, 140, 50}, 3);
+		var Triangle = regPolygon(600, 100, 50, 3);
+		g2.rotate(90, 600, 100);
 		g2.fill(Triangle);
 		g2.draw(Triangle);
+		g2.rotate(-90, 600, 100);
 
+		//Circles
 		g2.setColor(new Color(255, 239, 140));
 		g2.setStroke(new BasicStroke(2));
-		g2.drawOval(800, 50, 50, 50);
+		var emptyCircle = new Ellipse2D.Double(800, 50, 100, 100);
+		g2.draw(emptyCircle);
 
-		g2.fillOval(1000, 50, 50, 50);
+		var circle = new Ellipse2D.Double(1000, 50, 100, 100);
+		g2.rotate(90, circle.getCenterX(), circle.getCenterY());
+		g2.fill(circle);
+		g2.draw(circle);
+		g2.rotate(-90, circle.getCenterX(), circle.getCenterY());
 
+		//Ovals
 		g2.setColor(new Color(228, 248, 146));
 		g2.setStroke(new BasicStroke(3));
-		g2.drawOval(50, 300, 100, 50);
+		var emptyOval = new Ellipse2D.Double(100, 300, 50, 100);
+		g2.draw(emptyOval);
 
+		var oval = new Ellipse2D.Double(250, 300, 50, 100);
+		g2.rotate(90, oval.getCenterX(), oval.getCenterY());
+		g2.fill(oval);
+		g2.draw(oval);
+		g2.rotate(-90, oval.getCenterX(), oval.getCenterY());
 
-		g2.fillOval(250, 300, 100, 50);
-
-//		g2.rotate(120);
-
+		//Pentagons
 		g2.setColor(new Color(167, 233, 245));
 		g2.setStroke(new BasicStroke(3));
-		var EmptyPentagon = new Polygon(new int[]{750,679,482,374,593,784}, new int[]{212,423,433,322,354}, 5);
-		g2.draw(EmptyPentagon);
+		var EmptyRegPentagon = regPolygon(500, 500, 100, 5);
+		g2.draw(EmptyRegPentagon);
 
+		var regPentagon = regPolygon(750, 500, 100, 5);
+		g2.rotate(90, 750, 500);
+		g2.fill(regPentagon);
+		g2.draw(regPentagon);
+		g2.rotate(-90, 750, 500);
+
+		//Octagons
+		g2.setColor(new Color(229, 173, 252));
+		g2.setStroke(new BasicStroke(3));
+		var EmptyRegOctagon = regPolygon(800, 300, 50, 8);
+		g2.draw(EmptyRegOctagon);
+
+		var RegOctagon = regPolygon(950, 300, 50, 8);
+		g2.rotate(90, 950, 300);
+		g2.fill(RegOctagon);
+		g2.draw(RegOctagon);
+		g2.rotate(-90, 950, 300);
 
 		/*
 		 * Use this section to write your code.
@@ -92,9 +126,18 @@ public class DrawPanel extends JPanel {
 		 * Each empty shape should have a different stroke size.
 		 * Be sure all shapes are located such that they can all be seen.
 		 */
-		
-
-		
 	}//end of method paintComponent(Graphics)
 
+
+	public Polygon regPolygon(int xCenter, int yCenter, int radius, int sides) {
+		int[] xPoints = new int[sides];
+		int[] yPoints = new int[sides];
+
+		for (int i = 0; i < sides; i++) {
+			xPoints[i] = (int) (xCenter + radius * Math.cos(2 * Math.PI * i / sides));
+			yPoints[i] = (int) (yCenter + radius * Math.sin(2 * Math.PI * i / sides));
+		}
+
+        return new Polygon(xPoints, yPoints, sides);
+	}
 }//end of class DrawPanel

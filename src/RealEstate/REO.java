@@ -134,7 +134,6 @@ public class REO {
     }
 
     public static void autoPopulate(){
-//        int currentSize = listingsDB.getListings().size();
         House house1 = new House("34 Elm","95129", 3, 2, 2200,0.2, 0, 0);
         house1.setListPrice(house1.calculateAppraisalPrice() * 1.1);
         listingsDB.addListing("34 Elm", house1);

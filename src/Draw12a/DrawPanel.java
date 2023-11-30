@@ -66,6 +66,7 @@ public class DrawPanel extends JPanel {
 		g2.draw(Triangle);
 		g2.rotate(-90, 600, 100);
 
+
 		//Circles
 		g2.setColor(new Color(255, 239, 140));
 		g2.setStroke(new BasicStroke(2));

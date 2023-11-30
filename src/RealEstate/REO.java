@@ -222,7 +222,7 @@ public class REO {
             int num = 1;
             System.out.println("\nCurrent Listings for REO: ");
             System.out.printf("%-20s%5s", "No.", "Property (bids)\n");
-            System.out.println("--------------------------------------");
+            System.out.print("--------------------------------------\n");
             for (Residential listing : listingsDB.getListings().values()) {
                 System.out.printf("%-3s%-20s%5s\n", String.format(num + "."), listing.getStreetAddress(), String.format("(%d)", listing.getBidCount()));
                 num++;

@@ -23,14 +23,13 @@ public class Tree extends LandscapeObject{
 	private final int levels;						//The number of levels (branch triangles) the tree will have.
 	private final String trunkColor; 				// The Hex color of the trunk, including the preceding '#'. Set in the constructor.
 	private final String branchColor; 			// The Hex color of the branches, including the preceding '#'. Set in the constructor.
-	private final int trunkWidth = 10;			//The trunk width in pixels.  Default of 10 for a scale of 1.  Modified by applyScale method().
-	private final int trunkHeight = 15;			//The trunk height in pixels.  Default of 15 for a scale of 1.  Modified by applyScale method().
-	private final int branchWidth = 30;			//The branch width in pixels.  Default of 30 for a scale of 1.  Modified by applyScale method().
-	private final int branchHeight = 30;			//The branch height in pixels.  Default of 30 for a scale of 1.  Modified by applyScale method().
-	private final double branchOverlap = .45;		//Indicates how much of each triangle is overlapped by the one above it.
+	private int trunkWidth = 10;			//The trunk width in pixels.  Default of 10 for a scale of 1.  Modified by applyScale method().
+	private int trunkHeight = 15;			//The trunk height in pixels.  Default of 15 for a scale of 1.  Modified by applyScale method().
+	private int branchWidth = 30;			//The branch width in pixels.  Default of 30 for a scale of 1.  Modified by applyScale method().
+	private int branchHeight = 30;			//The branch height in pixels.  Default of 30 for a scale of 1.  Modified by applyScale method().
+	private double branchOverlap = 0.45;		//Indicates how much of each triangle is overlapped by the one above it.
 	private final BasicStroke treeStroke = new BasicStroke(1);	//Stroke of 1 pixel use to outline each shape of the tree.
 
-	
 	/**
 	 * Primary Constructor.
 	 * Sets all class attributes.
@@ -62,9 +61,9 @@ public class Tree extends LandscapeObject{
 	 * @return	void. 
 	 */
 	public void draw() {
-		//applyScale();
-		//drawTrunk();
-		//drawBranches();
+		applyScale();
+		drawTrunk();
+		drawBranches();
 	}//end of method draw()
 	
 	/**
@@ -75,6 +74,11 @@ public class Tree extends LandscapeObject{
 	 * @return	void. 
 	 */
 	public void applyScale() {
+		this.trunkHeight = (int) (this.getScale() * this.trunkHeight);
+		this.trunkWidth = (int) (this.getScale() * this.trunkWidth);
+        this.branchHeight = (int) (this.getScale() * this.branchHeight);
+		this.branchWidth = (int) (this.getScale() * this.branchWidth);
+		this.branchOverlap = this.getScale() * this.branchOverlap;
 	}//end of method applyScale()
 	/**
 	 * drawTrunk()
@@ -84,6 +88,13 @@ public class Tree extends LandscapeObject{
 	 * @return	void. 
 	 */
 	private void drawTrunk() {
+		g2.setColor(Color.decode(trunkColor));
+		g2.setStroke(treeStroke);
+		var truck = new Rectangle(this.currentX - this.trunkWidth / 2, this.currentY, this.trunkWidth, this.trunkHeight);
+		g2.fill(truck);
+		g2.draw(truck);
+		g2.setColor(Color.BLACK);
+		g2.draw(truck);
 	}//end of method drawTrunk()
 	/**
 	 * drawBranches()
@@ -93,5 +104,26 @@ public class Tree extends LandscapeObject{
 	 * @return	void. 
 	 */
 	private void drawBranches() {
-	}//end of method drawBranches()
+		int baseY = this.currentY;
+		int halfBranchWidth = this.branchWidth / 2;
+
+		for (int i = 0; i < levels; i++) {
+			int topY = baseY - branchHeight;
+			var branch = new Polygon(
+					new int[]{this.currentX - halfBranchWidth, this.currentX + halfBranchWidth, this.currentX},
+					new int[]{(int) (baseY + branchOverlap), (int) (baseY + branchOverlap), topY},
+					3
+			);
+
+			g2.setColor(Color.decode(branchColor));
+			g2.fill(branch);
+			g2.setStroke(treeStroke);
+			g2.draw(branch);
+
+			g2.setColor(Color.BLACK);
+			g2.draw(branch);
+
+			baseY -= (int) (branchHeight - branchOverlap * 35);
+		}
+	}
 }//end of class Tree

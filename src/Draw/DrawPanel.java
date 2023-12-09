@@ -23,38 +23,43 @@ public class DrawPanel extends JPanel {
 	private static final long serialVersionUID = 6311020027600344213L;
 	
 	//Landscape Colors
-	private final String LIGHT_SKY_BLUE = "87CEFA";
-	private final String MIDNIGHT_BLUE = "191970";
-	private final String SNOW3 = "CDC9C8";
-	private final String WHITE = "FFFFFF";
-	private final String MY_WHITE_SMOKE = "F5F5F5";
-	private final String LAWN_GREEN = "7CFC00";
-	private final String MEDIUM_SPRING_GREEN = "00FA9A";
-	private final String SPRING_GREEN = "00FF7F";
-	
+	private static final String LIGHT_SKY_BLUE = "87CEFA";
+	private static final String MIDNIGHT_BLUE = "191970";
+	private static final String SNOW3 = "CDC9C8";
+	private static final String WHITE = "FFFFFF";
+	private static final String MY_WHITE_SMOKE = "F5F5F5";
+	private static final String LAWN_GREEN = "7CFC00";
+	private static final String MEDIUM_SPRING_GREEN = "00FA9A";
+	private static final String SPRING_GREEN = "00FF7F";
+
 	//Tree Colors
-	private final String BROWN = "A52A2A";
-	private final String DARK_GREEN = "006400";
-	private final String FOREST_GREEN = "228B22";
-	private final String GRAY = "808080";
-	private final String GREEN = "008000";
+	private final static String BROWN = "A52A2A";
+	private final static String DARK_GREEN = "006400";
+	private final static String FOREST_GREEN = "228B22";
+	private final static String GRAY = "808080";
+	private final static String GREEN = "008000";
 	
 	//House Colors
-	private final String DARK_SLATE_GRAY = "2F4F4F";
-	private final String FIREBRICK = "B22222";
-	private final String INDIAN_RED = "CD5C5C";
-	private final String MAROON = "800000";
-	private final String MOCCASIN = "FFE4B5";
-	private final String RED = "FF0000";
-	private final String SADDLE_BROWN = "8B4513";
-	private final String SIENNA = "A0522D";
-	private final String SLATE_GRAY = "708090";
-	private final String PERU = "CD853F";
-	private final String WHITE_SMOKE = "F5F5F5";
-	private final String BURLYWOOD = "DEB887";
+	private final static String DARK_SLATE_GRAY = "2F4F4F";
+	private final static String FIREBRICK = "B22222";
+	private final static String INDIAN_RED = "CD5C5C";
+	private final static String MAROON = "800000";
+	private final static String MOCCASIN = "FFE4B5";
+	private final static String RED = "FF0000";
+	private final static String SADDLE_BROWN = "8B4513";
+	private final static String SIENNA = "A0522D";
+	private final static String SLATE_GRAY = "708090";
+	private final static String PERU = "CD853F";
+	private final static String WHITE_SMOKE = "F5F5F5";
+	private final static String BURLYWOOD = "DEB887";
 
+	// Flower Colors
 
+	private static final Color LIGHT_YELLOW = new Color(252, 239, 164);
 
+	private static final Color LIGHT_PINK = new Color(248, 225, 237);
+
+	private static final Color LIGHT_GREEN = new Color(203, 231, 91);
 
 	public DrawPanel() {
 		this.setPreferredSize(new Dimension(1280, 700));	//Sets the dimensions of the DrawPanel.  Change this if your screen doesn't support this size.
@@ -74,6 +79,7 @@ public class DrawPanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;			//Allows us to draw using both the Graphics class methods and the Graphics2D class methods
+		Random r = new Random();
 
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);	//Makes drawn shapes and fonts clearer
 
@@ -94,17 +100,17 @@ public class DrawPanel extends JPanel {
 		Tree t3 = new Tree(g2, 300, 450, 1, 4, BROWN , FOREST_GREEN);
 		t3.draw();
 
-		//Populate the scene with your own trees here!
-		Random r = new Random();
-		List<Tree> trees = new ArrayList<>();
+		List<LandscapeObject> landscapeObjects = new ArrayList<>();
 		int yBase = 350;
 		for(int i = 20; i >= 0; i--){
 			int xCor = r.nextInt(700) + 400;
 			int yCor = r.nextInt(20) + yBase;
 			int scale = r.nextInt(3) + 1;
 			int level = r.nextInt(4) + 3;
-			int colorIndex = r.nextInt(13) - 1;
-			String color = switch (colorIndex) {
+			int trunkColorIndex = r.nextInt(4) - 1;
+			int branchColorIndex = r.nextInt(13) - 1;
+
+			String BranchColor = switch (branchColorIndex) {
 				case 0 -> DARK_SLATE_GRAY;
 				case 1 -> FIREBRICK;
 				case 2 -> INDIAN_RED;
@@ -119,17 +125,27 @@ public class DrawPanel extends JPanel {
 				case 11 -> BURLYWOOD;
 				default -> GREEN;
 			};
-			trees.add(new Tree(g2, xCor, yCor, scale, level, BROWN, color));
 
-			yBase += 15;
+			String trunkColor = switch (trunkColorIndex) {
+				case 0 -> SADDLE_BROWN;
+				case 1 -> SIENNA;
+				case 2 -> BURLYWOOD;
+				default -> BROWN;
+			};
+
+			landscapeObjects.add(new Tree(g2, xCor, yCor, scale, level, trunkColor, BranchColor));
+
+			yBase += 13;
 		}
 
-		trees.sort(Comparator.comparingInt(tree -> tree.currentY));
+		landscapeObjects.sort(Comparator.comparingInt(landscapeObject -> landscapeObject.currentY));
 
-		for(Tree tree : trees) {
-			tree.draw();
+		for(LandscapeObject landscapeObject : landscapeObjects) {
+			landscapeObject.draw();
 		}
 
+		Flower flower = new Flower(g2, 500, 500, 5, 12, LIGHT_YELLOW, LIGHT_PINK, LIGHT_PINK);
+		flower.draw();
 	}//end of method paintComponent(Graphics)
 
 }//end of class DrawPanel

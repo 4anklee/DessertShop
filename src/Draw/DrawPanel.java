@@ -23,35 +23,35 @@ public class DrawPanel extends JPanel {
 	private static final long serialVersionUID = 6311020027600344213L;
 	
 	//Landscape Colors
-	private final String LIGHT_SKY_BLUE = "87CEFA";
-	private final String MIDNIGHT_BLUE = "191970";
-	private final String SNOW3 = "CDC9C8";
-	private final String WHITE = "FFFFFF";
-	private final String MY_WHITE_SMOKE = "F5F5F5";
-	private final String LAWN_GREEN = "7CFC00";
-	private final String MEDIUM_SPRING_GREEN = "00FA9A";
-	private final String SPRING_GREEN = "00FF7F";
+	private static final String LIGHT_SKY_BLUE = "87CEFA";
+	private static final String MIDNIGHT_BLUE = "191970";
+	private static final String SNOW3 = "CDC9C8";
+	private static final String WHITE = "FFFFFF";
+	private static final String MY_WHITE_SMOKE = "F5F5F5";
+	private static final String LAWN_GREEN = "7CFC00";
+	private static final String MEDIUM_SPRING_GREEN = "00FA9A";
+	private static final String SPRING_GREEN = "00FF7F";
 	
 	//Tree Colors
-	private final String BROWN = "A52A2A";
-	private final String DARK_GREEN = "006400";
-	private final String FOREST_GREEN = "228B22";
-	private final String GRAY = "808080";
-	private final String GREEN = "008000";
+	private static final String BROWN = "A52A2A";
+	private static final String DARK_GREEN = "006400";
+	private static final String FOREST_GREEN = "228B22";
+	private static final String GRAY = "808080";
+	private static final String GREEN = "008000";
 	
 	//House Colors
-	private final String DARK_SLATE_GRAY = "2F4F4F";
-	private final String FIREBRICK = "B22222";
-	private final String INDIAN_RED = "CD5C5C";
-	private final String MAROON = "800000";
-	private final String MOCCASIN = "FFE4B5";
-	private final String RED = "FF0000";
-	private final String SADDLE_BROWN = "8B4513";
-	private final String SIENNA = "A0522D";
-	private final String SLATE_GRAY = "708090";
-	private final String PERU = "CD853F";
-	private final String WHITE_SMOKE = "F5F5F5";
-	private final String BURLYWOOD = "DEB887";
+	private static final String DARK_SLATE_GRAY = "2F4F4F";
+	private static final String FIREBRICK = "B22222";
+	private static final String INDIAN_RED = "CD5C5C";
+	private static final String MAROON = "800000";
+	private static final String MOCCASIN = "FFE4B5";
+	private static final String RED = "FF0000";
+	private static final String SADDLE_BROWN = "8B4513";
+	private static final String SIENNA = "A0522D";
+	private static final String SLATE_GRAY = "708090";
+	private static final String PERU = "CD853F";
+	private static final String WHITE_SMOKE = "F5F5F5";
+	private static final String BURLYWOOD = "DEB887";
 
 
 

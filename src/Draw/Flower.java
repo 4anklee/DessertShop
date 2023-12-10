@@ -44,6 +44,8 @@ public class Flower extends LandscapeObject{
         int flowerCenterX = getStartX();
         int flowerCenterY = getStartY() - pistilsHeight;
         var path = new GeneralPath();
+
+
         for (int i = 0; i < petals; i++) {
             double StartAngle =  2 * Math.PI * i / petals - 2 * Math.PI / (petals * 2);
             double finalAngle = 2 * Math.PI * i / petals + 2 * Math.PI / (petals * 2);

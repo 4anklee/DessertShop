@@ -55,11 +55,11 @@ public class DrawPanel extends JPanel {
 
 	// Flower Colors
 
-	private static final Color LIGHT_YELLOW = new Color(252, 239, 164);
+	private static final Color LIGHT_YELLOW = new Color(246, 219, 70);
 
-	private static final Color LIGHT_PINK = new Color(248, 225, 237);
+	private static final Color LIGHT_PINK = new Color(246, 158, 202);
 
-	private static final Color LIGHT_GREEN = new Color(203, 231, 91);
+	private static final Color LIGHT_GREEN = new Color(191, 229, 40);
 
 	public DrawPanel() {
 		this.setPreferredSize(new Dimension(1280, 700));	//Sets the dimensions of the DrawPanel.  Change this if your screen doesn't support this size.
@@ -101,14 +101,21 @@ public class DrawPanel extends JPanel {
 		t3.draw();
 
 		List<LandscapeObject> landscapeObjects = new ArrayList<>();
-		int yBase = 350;
+		int yBase = 370;
 		for(int i = 20; i >= 0; i--){
-			int xCor = r.nextInt(700) + 400;
-			int yCor = r.nextInt(20) + yBase;
-			int scale = r.nextInt(3) + 1;
+			int xCorTree = r.nextInt(700) + 400;
+			int yCorTree = r.nextInt(20) + yBase;
+			int xCorFlower = r.nextInt(1300) + 10;
+			int yCorFlower = r.nextInt(20) + yBase + 20;
+			int treeScale = r.nextInt(3) + 1;
+			int flowerScale = (r.nextInt(4) + 1);
 			int level = r.nextInt(4) + 3;
+			int petal = r.nextInt(13) + 4;
 			int trunkColorIndex = r.nextInt(4) - 1;
 			int branchColorIndex = r.nextInt(13) - 1;
+			int petalColorIndex = r.nextInt(4) - 1;
+			int leafColorIndex = r.nextInt(4) - 1;
+			int pedicelColorIndex = r.nextInt(4) - 1;
 
 			String BranchColor = switch (branchColorIndex) {
 				case 0 -> DARK_SLATE_GRAY;
@@ -133,8 +140,30 @@ public class DrawPanel extends JPanel {
 				default -> BROWN;
 			};
 
-			landscapeObjects.add(new Tree(g2, xCor, yCor, scale, level, trunkColor, BranchColor));
+			Color petalColor = switch (petalColorIndex){
+				case 0 -> LIGHT_GREEN;
+				case 1 -> LIGHT_PINK;
+				case 2 -> LIGHT_YELLOW;
+				default -> Color.PINK;
+			};
 
+			Color leafColor = switch (leafColorIndex) {
+				case 0 -> new Color(96, 124, 54);
+				case 1 -> new Color(150, 213, 55);
+				case 2 -> new Color(96, 107, 80);
+				default -> new Color(60, 98, 2);
+			};
+
+			Color pedicelColor = switch (pedicelColorIndex) {
+				case 0 -> new Color(246, 176, 106);
+				case 1 -> new Color(252, 212, 185);
+				case 2 -> new Color(243, 193, 135);
+				default -> new Color(246, 167, 134);
+			};
+
+			landscapeObjects.add(new Tree(g2, xCorTree, yCorTree, treeScale, level, trunkColor, BranchColor));
+
+			landscapeObjects.add(new Flower(g2, xCorFlower, yCorFlower, flowerScale, petal, petalColor, leafColor, pedicelColor));
 			yBase += 13;
 		}
 
@@ -143,9 +172,6 @@ public class DrawPanel extends JPanel {
 		for(LandscapeObject landscapeObject : landscapeObjects) {
 			landscapeObject.draw();
 		}
-
-		Flower flower = new Flower(g2, 500, 500, 5, 12, LIGHT_YELLOW, LIGHT_PINK, LIGHT_PINK);
-		flower.draw();
 	}//end of method paintComponent(Graphics)
 
 }//end of class DrawPanel

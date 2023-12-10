@@ -11,7 +11,7 @@ public class Flower extends LandscapeObject{
     private final Color pedicelColor;
     private  int pedicelDiameter = 2;
     private  double pistilHeight = 4;
-    private  int petalLength = 2;
+    private  double petalLength = 2.2;
     private  double leafLength = 2.5;
     private final BasicStroke stroke = new BasicStroke(1);
 

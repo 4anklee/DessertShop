@@ -9,7 +9,7 @@ public class Flower extends LandscapeObject{
     private final Color flowerColor;
     private final Color leafColor;
     private static int pistilsHeight = 20;
-    private static int petalLength = 10;
+    private static int petalLength = 7;
     private static int leafLength = 10;
     private final BasicStroke stroke = new BasicStroke(1);
 
@@ -45,17 +45,17 @@ public class Flower extends LandscapeObject{
         int flowerCenterY = getStartY() - pistilsHeight;
         var path = new GeneralPath();
         for (int i = 0; i < petals; i++) {
-            double StartAngle =  2 * Math.PI * (i) / ((double) petals * 2);
-            double finalAngle = 2 * Math.PI * (i) / ((double) petals * 2);
+            double StartAngle =  2 * Math.PI * i / petals - 2 * Math.PI / (petals * 2);
+            double finalAngle = 2 * Math.PI * i / petals + 2 * Math.PI / (petals * 2);
             double angle = 2 * Math.PI * i / petals;
-            g2.setColor(new Color(231, 4, 4));
-            g2.drawLine(flowerCenterX, flowerCenterY,
-                    (int) (Math.round(flowerCenterX + petalLength * Math.cos(angle))),
-                    (int) (Math.round(flowerCenterY + petalLength * Math.sin(angle))));
+
             g2.setColor(new Color(26, 218, 183));
-            path.moveTo((int) (Math.round(flowerCenterX + petalLength * Math.cos(StartAngle))), (int) (Math.round(flowerCenterY + petalLength * Math.sin(StartAngle))));
-            path.quadTo((int) (Math.round(flowerCenterX + petalLength * Math.cos((StartAngle+finalAngle)/2))),
-                    (int) (Math.round(flowerCenterY + petalLength * Math.sin((StartAngle+finalAngle)/2))),
+
+            path.moveTo(flowerCenterX, flowerCenterY);
+            path.lineTo((int) (Math.round(flowerCenterX + petalLength * Math.cos(StartAngle))),
+                    (int) (Math.round(flowerCenterY + petalLength * Math.sin(StartAngle))));
+            path.quadTo((int) Math.round(flowerCenterX + 2 * petalLength * Math.cos(angle)),
+                    (int) Math.round(flowerCenterY + 2 * petalLength * Math.sin(angle)),
                     (int) (Math.round(flowerCenterX + petalLength * Math.cos(finalAngle))),
                     (int) (Math.round(flowerCenterY + petalLength * Math.sin(finalAngle))));
             path.closePath();

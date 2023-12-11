@@ -3,10 +3,8 @@ package Draw;
 import javax.swing.*;
 import java.awt.*;
 import java.io.Serial;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Class used to create a DrawPanel where shapes will be drawn by the programmer (via code).
@@ -81,15 +79,18 @@ public class DrawPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;			//Allows us to draw using both the Graphics class methods and the Graphics2D class methods
 		Random r = new Random();
 
+
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);	//Makes drawn shapes and fonts clearer
 
 		//DrawTree landscape
-		g2.setColor(Color.decode("#" + LIGHT_SKY_BLUE));
+		g2.setColor(Color.decode("#" + MIDNIGHT_BLUE));
 		g2.fillRect(0,0,this.getWidth(),this.getHeight());
 		
 		g2.setColor(Color.decode("#" + LAWN_GREEN));
 		g2.fillOval((-600), 350, this.getWidth() + 1200, 700);
-		
+
+		List<LandscapeObject> landscapeObjects = new ArrayList<>();
+
 		//DrawTree Trees
 		Tree t1 = new Tree(g2, 50, 400, 1, 3, BROWN , DARK_GREEN);
 		t1.draw();
@@ -100,22 +101,34 @@ public class DrawPanel extends JPanel {
 		Tree t3 = new Tree(g2, 300, 450, 1, 4, BROWN , FOREST_GREEN);
 		t3.draw();
 
-		List<LandscapeObject> landscapeObjects = new ArrayList<>();
+		Collections.addAll(landscapeObjects, t1, t2, t3);
+
+
 		int yBase = 370;
 		for(int i = 20; i >= 0; i--){
 			int xCorTree = r.nextInt(700) + 400;
 			int yCorTree = r.nextInt(20) + yBase;
 			int xCorFlower = r.nextInt(1300) + 10;
 			int yCorFlower = r.nextInt(20) + yBase + 20;
+			int xCorStar = r.nextInt(1300) + 10;
+			int yCorStar = r.nextInt(310) + 30;
+			int xCorDogeCoin = r.nextInt(1300) + 10;
+			int yCorDogeCoin = r.nextInt(20) + yBase;
 			int treeScale = r.nextInt(3) + 1;
-			int flowerScale = (r.nextInt(4) + 1);
+			int flowerScale = r.nextInt(4) + 1;
+			int starScale = r.nextInt(3) + 1;
+			int dogeCoinScale = r.nextInt(3) + 1;
 			int level = r.nextInt(4) + 3;
 			int petal = r.nextInt(13) + 4;
-			int trunkColorIndex = r.nextInt(4) - 1;
-			int branchColorIndex = r.nextInt(13) - 1;
-			int petalColorIndex = r.nextInt(4) - 1;
-			int leafColorIndex = r.nextInt(4) - 1;
-			int pedicelColorIndex = r.nextInt(4) - 1;
+			int point = r.nextInt(3) + 4;
+			int trunkColorIndex = r.nextInt(4);
+			int branchColorIndex = r.nextInt(13);
+			int petalColorIndex = r.nextInt(4);
+			int leafColorIndex = r.nextInt(4);
+			int pedicelColorIndex = r.nextInt(4);
+			int starColorIndex = r.nextInt(4);
+			int denominationIndex = r.nextInt(4);
+			boolean isBill = r.nextBoolean();
 
 			String BranchColor = switch (branchColorIndex) {
 				case 0 -> DARK_SLATE_GRAY;
@@ -161,17 +174,42 @@ public class DrawPanel extends JPanel {
 				default -> new Color(246, 167, 134);
 			};
 
+			Color starColor = switch (starColorIndex) {
+				case 0 -> new Color(248, 228, 9);
+				case 1 -> new Color(255, 251, 230);
+				case 2 -> new Color(228, 248, 250);
+				default -> new Color(255, 239, 39);
+			};
+
+			String denomination = switch (denominationIndex){
+				case 0 -> "100";
+				case 1 -> "200";
+				case 2 -> "500";
+				default -> "1000";
+			};
+
 			landscapeObjects.add(new Tree(g2, xCorTree, yCorTree, treeScale, level, trunkColor, BranchColor));
 
 			landscapeObjects.add(new Flower(g2, xCorFlower, yCorFlower, flowerScale, petal, petalColor, leafColor, pedicelColor));
+
+			landscapeObjects.add(new Star(g2, xCorStar, yCorStar, starScale, point, starColor));
+
+			landscapeObjects.add(new DogeCoin(g2, xCorDogeCoin, yCorDogeCoin, dogeCoinScale, isBill, denomination));
+
 			yBase += 13;
 		}
+
+		landscapeObjects.add(new CyberTruck(g2, 50, 370, 1));
 
 		landscapeObjects.sort(Comparator.comparingInt(landscapeObject -> landscapeObject.currentY));
 
 		for(LandscapeObject landscapeObject : landscapeObjects) {
 			landscapeObject.draw();
 		}
+
+
+
+
 	}//end of method paintComponent(Graphics)
 
 }//end of class DrawPanel

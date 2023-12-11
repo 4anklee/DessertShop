@@ -48,6 +48,7 @@ public class Tree extends LandscapeObject{
 		this.levels = levels;
 		this.trunkColor = "#" + s_trunkColor;
 		this.branchColor = "#" + s_branchColor;
+		this.currentY = (int) (y + trunkHeight * scale);
 	}//end of Constructor Tree
 	
 	
@@ -57,9 +58,8 @@ public class Tree extends LandscapeObject{
 	 * Calls applyScale to apply the scale multiplier to all shape dimensions for the object.
 	 * Calls drawTrunk to draw the trunk of the tree.
 	 * Calls drawBranches to draw the branches of the tree.
-	 * 
-	 * @return	void. 
-	 */
+	 *
+     */
 	public void draw() {
 		applyScale();
 		drawTrunk();
@@ -70,9 +70,8 @@ public class Tree extends LandscapeObject{
 	 * applyScale
 	 * Applies the scale multiplier to all shape dimensions for the object.
 	 * Called by draw()
-	 * 
-	 * @return	void. 
-	 */
+	 *
+     */
 	public void applyScale() {
 		this.trunkHeight = (int) (this.getScale() * this.trunkHeight);
 		this.trunkWidth = (int) (this.getScale() * this.trunkWidth);
@@ -84,13 +83,12 @@ public class Tree extends LandscapeObject{
 	 * drawTrunk()
 	 * Draws a rectangle for the trunk of the tree.
 	 * Called by draw()
-	 * 
-	 * @return	void. 
-	 */
+	 *
+     */
 	private void drawTrunk() {
 		g2.setColor(Color.decode(trunkColor));
 		g2.setStroke(treeStroke);
-		var truck = new Rectangle(this.currentX - this.trunkWidth / 2, this.currentY, this.trunkWidth, this.trunkHeight);
+		var truck = new Rectangle(this.getStartX() - this.trunkWidth / 2, this.getStartY(), this.trunkWidth, this.trunkHeight);
 		g2.fill(truck);
 		g2.draw(truck);
 		g2.setColor(Color.BLACK);
@@ -100,17 +98,16 @@ public class Tree extends LandscapeObject{
 	 * drawBranches()
 	 * Draws 'level' number of triangles above the trunk overlapped by 'branchOverlap'.
 	 * Called by draw()
-	 * 
-	 * @return	void. 
-	 */
+	 *
+     */
 	private void drawBranches() {
-		int baseY = this.currentY;
+		int baseY = this.getStartY();
 		int halfBranchWidth = this.branchWidth / 2;
 
 		for (int i = 0; i < levels; i++) {
 			int topY = baseY - branchHeight;
 			var branch = new Polygon(
-					new int[]{this.currentX - halfBranchWidth, this.currentX + halfBranchWidth, this.currentX},
+					new int[]{this.getStartX() - halfBranchWidth, this.getStartX() + halfBranchWidth, this.getStartX()},
 					new int[]{(int) (baseY + branchOverlap), (int) (baseY + branchOverlap), topY},
 					3
 			);

@@ -51,32 +51,32 @@ public class Flower extends LandscapeObject{
 
 
         for (int i = 0; i < petals; i++) {
-            double StartAngle =  2 * Math.PI * i / petals - 2 * Math.PI / (petals * 2);
-            double finalAngle = 2 * Math.PI * i / petals + 2 * Math.PI / (petals * 2);
-            double angle = 2 * Math.PI * i / petals;
+            double StartRadian =  2 * Math.PI * i / petals - 2 * Math.PI / (petals * 2);
+            double finalRadian = 2 * Math.PI * i / petals + 2 * Math.PI / (petals * 2);
+            double Radian = 2 * Math.PI * i / petals;
 
             g2.setColor(petalColor);
 
             path.moveTo(flowerCenterX, flowerCenterY);
-            path.lineTo((int) (Math.round(flowerCenterX + petalLength * Math.cos(StartAngle))),
-                    (int) (Math.round(flowerCenterY + petalLength * Math.sin(StartAngle))));
-            path.quadTo((int) Math.round(flowerCenterX + 2 * petalLength * Math.cos(angle)),
-                    (int) Math.round(flowerCenterY + 2 * petalLength * Math.sin(angle)),
-                    (int) (Math.round(flowerCenterX + petalLength * Math.cos(finalAngle))),
-                    (int) (Math.round(flowerCenterY + petalLength * Math.sin(finalAngle))));
+            path.lineTo((int) (Math.round(flowerCenterX + petalLength * Math.cos(StartRadian))),
+                    (int) (Math.round(flowerCenterY - petalLength * Math.sin(StartRadian))));
+            path.quadTo((int) Math.round(flowerCenterX + 2 * petalLength * Math.cos(Radian)),
+                    (int) Math.round(flowerCenterY - 2 * petalLength * Math.sin(Radian)),
+                    (int) (Math.round(flowerCenterX + petalLength * Math.cos(finalRadian))),
+                    (int) (Math.round(flowerCenterY - petalLength * Math.sin(finalRadian))));
             path.closePath();
 
             g2.fill(path);
             g2.setColor(Color.BLACK);
             g2.draw(path);
-
-            g2.setColor(pedicelColor);
-            var pedicel = new Ellipse2D.Double(flowerCenterX - (double) (pedicelDiameter / 2), flowerCenterY - (double) (pedicelDiameter / 2), pedicelDiameter, pedicelDiameter);
-            g2.fill(pedicel);
-            g2.draw(pedicel);
-            g2.setColor(Color.BLACK);
-            g2.draw(pedicel);
         }
+
+        g2.setColor(pedicelColor);
+        var pedicel = new Ellipse2D.Double(flowerCenterX - (double) (pedicelDiameter / 2), flowerCenterY - (double) (pedicelDiameter / 2), pedicelDiameter, pedicelDiameter);
+        g2.fill(pedicel);
+        g2.draw(pedicel);
+        g2.setColor(Color.BLACK);
+        g2.draw(pedicel);
     }
 
     private void drawPistil() {
